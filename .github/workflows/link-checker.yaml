@@ -2,15 +2,29 @@
 name: Link Checker
 
 on:
-  push: null
-  repository_dispatch: null
-  workflow_dispatch: null
   pull_request:
-    branches: [main]
+    branches:
+      - main
     types:
-      [opened, reopened, synchronize]
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - 'docs/**'
+      - '**/*.md'
+      - '*.md'
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '**/*.md'
+      - '*.md'
+  workflow_dispatch: null
+
 permissions:
   contents: read
+
 jobs:
   linkChecker:
     runs-on: ubuntu-latest

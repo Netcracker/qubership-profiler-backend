@@ -1,0 +1,112 @@
+TIMESTAMP: active_during_hour: 2023-07-24T12:00:00Z
+
+TIMESTAMP: active_during_hour: 2023-07-24T12:00:00Z
+
+TEXT: pod_name: esc-ui-service-84967fdd77-pwhw4_1690201584049
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TIMESTAMP: modified_when: 2023-07-24T12:13:30.505Z
+TIMESTAMP: create_when: 2023-07-24T12:28:32.456Z
+TEXT: pod_name: esc-ui-service-84967fdd77-pwhw4_1690201584049
+TEXT: stream_name: calls
+
+TIMESTAMP: modified_when: 2023-07-24T12:13:30.393Z
+TIMESTAMP: create_when: 2023-07-24T12:28:32.568Z
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TEXT: stream_name: calls
+
+TEXT: pod_name: esc-ui-service-84967fdd77-pwhw4_1690201584049
+TEXT: stream_name: calls
+INT: rolling_sequence_id: 0
+
+TEXT: pod_name: esc-ui-service-84967fdd77-pwhw4_1690201584049
+TIMESTAMP: time: 2023-07-24T12:26:23.767Z
+TIMESTAMP: time: 2023-07-24T12:31:53.767Z
+
+TEXT: pod_name: esc-ui-service-84967fdd77-pwhw4_1690201584049
+TIMESTAMP: time: 2023-07-24T12:28:33.043Z
+TIMESTAMP: time: 2023-07-24T12:34:03.043Z
+
+TEXT: pod_name: esc-ui-service-84967fdd77-pwhw4_1690201584049
+
+TEXT: pod_name: esc-ui-service-84967fdd77-pwhw4_1690201584049
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TEXT: stream_name: calls
+INT: rolling_sequence_id: 396
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:25:16.582Z
+TIMESTAMP: time: 2023-07-24T12:30:46.582Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:25:16.581Z
+TIMESTAMP: time: 2023-07-24T12:30:16.582Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:26:53.464Z
+TIMESTAMP: time: 2023-07-24T12:32:23.464Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:27:23.464Z
+TIMESTAMP: time: 2023-07-24T12:32:53.464Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:27:53.464Z
+TIMESTAMP: time: 2023-07-24T12:33:23.464Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TEXT: stream_name: calls
+INT: rolling_sequence_id: 395
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:13:56.583Z
+TIMESTAMP: time: 2023-07-24T12:19:26.583Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:18:51.866Z
+TIMESTAMP: time: 2023-07-24T12:24:21.866Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:13:31.378Z
+TIMESTAMP: time: 2023-07-24T12:18:56.583Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:11:38.747Z
+TIMESTAMP: time: 2023-07-24T12:18:31.378Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:23:52.853Z
+TIMESTAMP: time: 2023-07-24T12:29:22.853Z
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TEXT: stream_name: calls
+INT: rolling_sequence_id: 394
+
+TEXT: pod_name: esc-ui-service-9b9d8c474-zm5ln_1689836179754
+TIMESTAMP: time: 2023-07-24T12:13:31.378Z
+TIMESTAMP: time: 2023-07-24T12:19:01.378Z
+

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "pid": 0,
+    "name": "profiler",
+    "kind": "ns"
+  },
+  {
+    "id": 2,
+    "pid": 1,
+    "name": "esc-collector-service",
+    "kind": "srv"
+  },
+  {
+    "id": 5,
+    "pid": 1,
+    "name": "esc-ui-service",
+    "kind": "srv"
+  },
+  {
+    "id": 6,
+    "pid": 5,
+    "name": "esc-ui-service-564c9d8d8b-v7bpx_1688641130294",
+    "kind": "pod"
+  },
+  {
+    "id": 4,
+    "pid": 2,
+    "name": "esc-collector-service-6fbc476746-pnprd_1689077097434",
+    "kind": "pod"
+  },
+  {
+    "id": 3,
+    "pid": 2,
+    "name": "esc-collector-service-6fbc476746-pnprd_1689047771525",
+    "kind": "pod"
+  }
+]

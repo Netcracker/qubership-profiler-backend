@@ -1,0 +1,17 @@
+CREATE KEYSPACE IF NOT EXISTS cdt WITH replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 } AND durable_writes = true;
+select pod_name, service_name, namespace, pod_info, rc_info, dc_info from pod_details
+select * from active_pods where active_during_hour = ?
+select rolling_sequence_id, create_when, modified_when from stream_registry where modified_when >= ? and create_when <= ? and pod_name = ? and stream_name = ? allow filtering
+SELECT * FROM pod_details WHERE pod_name=? LIMIT 1
+select position, tag from stream_dictionary where pod_name = ? allow filtering
+select param_name, param_index, param_list, param_order, signature from stream_params where pod_name = ? allow filtering
+select * from stream_chunks where pod_name = ? and stream_name = ? and rolling_sequence_id = ?
+select pod_name, time, suspend_time from stream_suspend where pod_name = ? and time > ? and time < ? allow filtering
+select * from pod_statistics where pod_name = ? and stream_name = ? and cur_date >= ? and cur_date <= ?
+select * from pod_details where pod_name = ?
+select pod_name, data_accumulated from stream_registry where pod_name = ? allow filtering
+select pod_name from pod_active_time where pod_name = ? and last_active > ? allow filtering
+select position, tag from stream_dictionary where pod_name = ? and position in ? allow filtering
+select pod_name from pod_details where pod_name = ? and service_name = ? and namespace = ? allow filtering
+select * from stream_registry where pod_name = ? and stream_name = ? and rolling_sequence_id = ?
+select pod_name from pod_details where pod_name = ? and namespace = ? allow filtering

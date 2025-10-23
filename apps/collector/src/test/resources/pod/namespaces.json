@@ -1,0 +1,63 @@
+[
+  {
+    "namespace": "profiler",
+    "services": [
+      {
+        "namespace": "profiler",
+        "serviceName": "esc-collector-service",
+        "pods": [
+          {
+            "namespace": "profiler",
+            "serviceName": "esc-collector-service",
+            "podName": "esc-collector-service-55c6cccf75-dlg5x_1687665091565",
+            "podInfo": "unknown",
+            "rcInfo": "unknown",
+            "dcInfo": "unknown"
+          }
+        ]
+      },
+      {
+        "namespace": "profiler",
+        "serviceName": "esc-test-service",
+        "pods": [
+          {
+            "namespace": "profiler",
+            "serviceName": "esc-test-service",
+            "podName": "esc-test-service-58dfcb97-n4f7w_1675853926859",
+            "podInfo": "unknown",
+            "rcInfo": "unknown",
+            "dcInfo": "unknown"
+          }
+        ]
+      },
+      {
+        "namespace": "profiler",
+        "serviceName": "esc-ui-service",
+        "pods": [
+          {
+            "namespace": "profiler",
+            "serviceName": "esc-ui-service",
+            "podName": "esc-ui-service-7b9c679fbf-z6vbm_1687155400163",
+            "podInfo": "unknown",
+            "rcInfo": "unknown",
+            "dcInfo": "unknown"
+          }
+        ]
+      },
+      {
+        "namespace": "profiler",
+        "serviceName": "unknown",
+        "pods": [
+          {
+            "namespace": "profiler",
+            "serviceName": "unknown",
+            "podName": "esc-collector-service-5f8b6df77-qxjm5",
+            "podInfo": "unknown",
+            "rcInfo": "unknown",
+            "dcInfo": "unknown"
+          }
+        ]
+      }
+    ]
+  }
+]

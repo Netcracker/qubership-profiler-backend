@@ -1,0 +1,422 @@
+[
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:31:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 109948
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:30:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 108222
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:29:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 106395
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:28:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 104587
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:27:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 103046
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:26:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 101391
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:25:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 99529
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:24:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 97785
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:23:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 96233
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:22:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 94618
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:21:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 92855
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:20:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 90824
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:19:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 89249
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:18:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 87350
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:17:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 85519
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:16:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 83594
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:15:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 81640
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:14:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 79821
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:13:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 78005
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:12:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 76068
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:11:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 74315
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:10:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 72588
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:09:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 70861
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:08:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 69110
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:07:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 67332
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:06:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 65752
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:05:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 64019
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:04:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 62307
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:03:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 60423
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:02:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 58599
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:01:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 56852
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T09:00:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 54735
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:59:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 52943
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:58:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 51022
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:57:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 48993
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:56:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 47032
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:55:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 45267
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:54:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 43357
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:53:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 41390
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:52:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 38360
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:51:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 36492
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:50:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 34730
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:49:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 32725
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:48:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 31010
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:47:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 29374
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:46:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 27558
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:45:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 25939
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:44:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 24165
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:43:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 22503
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:42:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 20849
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:41:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 19051
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:40:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 17372
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:39:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 15481
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:38:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 13836
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:37:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 11953
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:36:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 10302
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:35:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 8379
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:34:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 6620
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:33:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 4632
+  },
+  {
+    "podName": "esc-collector-service-55c6cccf75-dlg5x_1688200280679",
+    "streamName": "calls",
+    "curDate": "2023-07-01T08:32:00Z",
+    "activeSince": "2023-07-01T08:32:05.760Z",
+    "dataAccumulated": 2717
+  }
+]

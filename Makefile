@@ -2,12 +2,12 @@
 # Orchestrates builds for all applications and deployment components
 
 .PHONY: help build-all clean-all test-all docker-build-all archive-all \
-        apps tools charts examples delivery \
-        apps-build apps-clean apps-test apps-docker apps-archive \
-        tools-build tools-clean tools-test tools-docker tools-archive \
-        charts-build charts-clean \
-        examples-build examples-clean \
-        delivery-build delivery-clean
+	apps tools charts examples delivery \
+	apps-build apps-clean apps-test apps-docker apps-archive \
+	tools-build tools-clean tools-test tools-docker tools-archive \
+	charts-build charts-clean \
+	examples-build examples-clean \
+	delivery-build delivery-clean
 
 # Variables
 APPS_DIR := apps

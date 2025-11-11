@@ -3,7 +3,7 @@ import CallsTreeContextProvider, { type CallsTreeContextModel } from './calls-tr
 import classNames from './calls-tree-page.module.scss';
 import CallsTreeDashboard from './calls-tree-dashboard';
 import CallsTreeHeader from './calls-tree-context-header';
-import { UxLayout } from '@netcracker/ux-react';
+import { Divider } from 'antd';
 
 type CallsTreeOverlayProps = CallsTreeContextModel & {
     leftExtraHeader?: React.ReactNode
@@ -15,7 +15,7 @@ const CallsTreeOverlay: FC<CallsTreeOverlayProps> = ({leftExtraHeader, rightExtr
         <CallsTreeContextProvider {...contextProps}>
             <section className={classNames.page}>
                 <CallsTreeHeader leftExtra={leftExtraHeader} rightExtra={rightExtraHeader}/>
-                <UxLayout.Separator offset={0} color="#D5DCE3" />
+                <Divider style={{ margin: 0, borderColor: '#D5DCE3' }} />
                 <CallsTreeDashboard />
             </section>
         </CallsTreeContextProvider>

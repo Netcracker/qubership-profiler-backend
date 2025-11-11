@@ -5,13 +5,12 @@ import useCallsFetchArg from "@app/features/cdt/calls/use-calls-fetch-arg";
 import { useGetCallsByConditionQuery } from '@app/store/cdt-openapi';
 import { createExportUrl, createCallUrl } from '@app/features/cdt/calls/create-call-url';
 
-import { ReactComponent as Download20Icon } from '@netcracker/ux-assets/icons/download/download-20.svg';
-import { ReactComponent as OpenIn20Icon } from '@netcracker/ux-assets/icons/open-in/open-in-20.svg';
-import { UxButton, UxIcon, UxTooltip } from '@netcracker/ux-react';
+import { DownloadOutlined, ExportOutlined } from '@ant-design/icons';
+import { Button, Tooltip } from 'antd';
 
 const CallsControls = () => {
     const [selectedCalls, set] = useCallsStore(s => s.selectedCalls);
-    const openCallsDisabled = !selectedCalls || selectedCalls?.length === 0;
+    const openCallsDisabled = !selectedCalls || !Array.isArray(selectedCalls) || selectedCalls.length === 0;
     const searchParamsApplied = useSearchParamsApplied();
     const [callRequest, { shouldSkip, notReady }] = useCallsFetchArg();
     console.log(callRequest.filters.duration);
@@ -36,42 +35,42 @@ const CallsControls = () => {
     return (
         <>
 
-            <UxTooltip
+            <Tooltip
                 title={!openCallsDisabled ? `Show calls statistics as graph` : undefined}
                 placement="bottomLeft"
             >
-                <UxButton
+                <Button
                     onClick={handleHideGraph}
                     // disabled={showGraphDisabled}
                 >
                     { graphCollapsed ? "Show Graph" : "Hide Graph" }
-                </UxButton>
-            </UxTooltip>
+                </Button>
+            </Tooltip>
 
-            <UxTooltip
+            <Tooltip
                 title={!openCallsDisabled ? `Download calls as CSV file ` + callRequest.filters.duration : undefined}
                 placement="bottomLeft"
             >
-                <UxButton
+                <Button
                     href={createExportUrl(callRequest)}
                     target="_blank"
-                    type="light"
+                    type="default"
                     // disabled={!searchParamsApplied}
-                    leftIcon={<UxIcon component={Download20Icon} />}
+                    icon={<DownloadOutlined />}
                 />
-            </UxTooltip>
+            </Tooltip>
 
-            <UxTooltip
-                title={!openCallsDisabled ? `Open selected items (${selectedCalls.length})` : undefined}
+            <Tooltip
+                title={!openCallsDisabled && Array.isArray(selectedCalls) ? `Open selected items (${selectedCalls.length})` : undefined}
                 placement="bottomLeft"
             >
-                <UxButton
-                    href={!openCallsDisabled ? createCallUrl(selectedCalls) : undefined}
+                <Button
+                    href={!openCallsDisabled && Array.isArray(selectedCalls) ? createCallUrl(selectedCalls) : undefined}
                     disabled={openCallsDisabled}
-                    type="light"
-                    leftIcon={<UxIcon component={OpenIn20Icon} />}
+                    type="default"
+                    icon={<ExportOutlined />}
                 />
-            </UxTooltip>
+            </Tooltip>
         </>
     );
 };

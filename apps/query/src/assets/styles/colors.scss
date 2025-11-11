@@ -1,4 +1,13 @@
-@import '@netcracker/ux-react/assets/styles/colors';
+// Color variables
+$amarant: #d63031;
+$magnet: #6c5ce7;
+$niagara: #00b894;
+$denim: #0984e3;
+$sand: #ffeaa7;
+$grey-london-fog: #d5dce3;
+
+// Legacy color variable (used in existing files)
+$pigeon: #6c757d;
 
 .pigeon {
     color: $pigeon;

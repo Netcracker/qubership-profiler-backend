@@ -1,0 +1,33 @@
+.app-header-layout {
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0 24px;
+    height: 64px;
+    line-height: 64px;
+
+    .app-header-row {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .app-header-logo {
+        margin-right: 24px;
+
+        img {
+            height: 32px;
+        }
+    }
+
+    .app-header-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-right: auto;
+    }
+
+    .app-header-group {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+}

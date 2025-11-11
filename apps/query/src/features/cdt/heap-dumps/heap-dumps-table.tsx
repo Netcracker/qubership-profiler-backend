@@ -3,7 +3,7 @@ import { useSidebarApiArgs } from '@app/features/cdt/hooks/use-sidebar-api-args'
 import { useGetHeapDumpsQuery, type HeapDumpInfo } from '@app/store/cdt-openapi';
 import { useAppSelector } from '@app/store/hooks';
 import { selectSearchParamsApplied } from '@app/store/slices/context-slices';
-import { UxLoader, UxTable } from '@netcracker/ux-react';
+import { Spin, Table } from 'antd';
 import { type ColumnType } from 'antd/lib/table';
 import prettyBytes from 'pretty-bytes';
 import { memo } from 'react';
@@ -46,7 +46,7 @@ const columns: ColumnType<HeapDumpInfo>[] = [
         },
     },
 ];
-const tableIndicator = { indicator: <UxLoader /> };
+const tableIndicator = { indicator: <Spin /> };
 const tableScroll = { x: 'max-content' };
 
 const HeapDumpsTable = memo(() => {
@@ -69,7 +69,7 @@ const HeapDumpsTable = memo(() => {
 
     return (
         <div className="table-container">
-            <UxTable
+            <Table
                 columns={columns}
                 loading={isFetching && tableIndicator}
                 dataSource={data}

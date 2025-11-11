@@ -4,13 +4,14 @@ import LoadingPage from '@app/pages/loading.page';
 import type { Container } from '@app/store/cdt-openapi';
 import { useAppDispatch, useAppSelector } from '@app/store/hooks';
 import { contextDataAction, selectTreeState } from '@app/store/slices/context-slices';
-import { InfoPage } from '@netcracker/cse-ui-components';
-import { UxTree } from '@netcracker/ux-react';
-import { UxSearch } from '@netcracker/ux-react/inputs/input/search/search.component';
+import { InfoPage } from '@app/components/info-page/info-page';
+import { Tree, Input } from 'antd';
 import { useCallback, useDeferredValue, useMemo, useRef, useState, type Key } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classNames from './namespaces-tree.module.scss';
 import { useCheckKeys } from './use-checked-keys';
+
+const { Search } = Input;
 
 function filterKeysByFilteredData(filteredData: Container[], checkedKeys: Key[]) {
     return checkedKeys.filter(key => {
@@ -110,7 +111,7 @@ const NamespacesTree = () => {
 
     return (
         <div className={classNames.container} ref={containerRef}>
-            <UxSearch
+            <Search
                 size="small"
                 placeholder="Search"
                 value={search}
@@ -121,12 +122,12 @@ const NamespacesTree = () => {
             {isError && (
                 <InfoPage
                     title="Failed to load namespaces"
-                    message={'status' in error ? error.status : error.message}
+                    description={'status' in error ? error.status : error.message}
                 />
             )}
             {isFetching && <LoadingPage style={{ height: '100%' }} />}
             {!isFetching && (
-                <UxTree
+                <Tree
                     treeData={treeData}
                     height={(containerRef.current?.clientHeight ?? 500) - 44}
                     checkable

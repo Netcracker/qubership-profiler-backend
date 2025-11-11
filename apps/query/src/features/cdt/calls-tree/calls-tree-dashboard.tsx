@@ -2,9 +2,9 @@ import { memo, type FC, useEffect } from 'react';
 import classNames from './calls-tree-page.module.scss';
 import RGL, { WidthProvider } from 'react-grid-layout';
 import CallsTreeDashboardEntity from './dashboard-entity/calls-tree-dashboard-entity';
-import { UxIcon } from '@netcracker/ux-react';
+// UxIcon removed - using SVGs directly
 import { ReactComponent as ResizableIcon } from '@app/assets/icons/resizable-icon.svg';
-import { InfoPage } from '@netcracker/cse-ui-components';
+import { InfoPage } from '@app/components/info-page/info-page';
 import { ReactComponent as RedHairFail } from '@app/assets/illustrations/red-hair-fail.svg';
 import LoadingPage from '@app/pages/loading.page';
 import { callsTreeContextDataAction, selectDashboardState } from '@app/store/slices/calls-tree-context-slices';
@@ -34,7 +34,7 @@ const CallsTreeDashboard: FC = () => {
             {isError && (
                 <InfoPage
                     title="Something went wrong"
-                    message="Please refresh the page or try again later."
+                    description="Please refresh the page or try again later."
                     icon={<RedHairFail />}
                 />
             )}
@@ -48,7 +48,7 @@ const CallsTreeDashboard: FC = () => {
                     onLayoutChange={onLayoutChange}
                     resizeHandle={
                         <div className={classNames.resizableIcon}>
-                            <UxIcon component={ResizableIcon} style={{ fontSize: 8 }} />
+                            <ResizableIcon style={{ width: 8, height: 8 }} />
                         </div>
                     }
                 >

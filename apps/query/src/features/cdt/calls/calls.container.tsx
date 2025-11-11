@@ -3,7 +3,7 @@ import CallsChart from '@app/features/cdt/calls/calls-chart';
 import { withCallsStore } from '@app/features/cdt/calls/calls-store';
 import CallsTable from '@app/features/cdt/calls/calls-table';
 import useCallsFetchArg from '@app/features/cdt/calls/use-calls-fetch-arg';
-import { ContentCard } from '@netcracker/cse-ui-components';
+import { ContentCard } from '@app/components/content-card/content-card';
 import type { FC } from 'react';
 
 const CallsContainer: FC = () => {

@@ -1,5 +1,5 @@
 import { type StatsInfo } from '@app/store/cdt-openapi';
-import { UxTableNew } from '@netcracker/ux-react';
+import { Table } from 'antd';
 import { memo, type FC } from 'react';
 import { useCallsTreeData } from '../../calls-tree-context';
 import { columnsFactory, type TableData } from './columns';
@@ -25,9 +25,9 @@ const StatsTable: FC = () => {
 
     return (
         <div className="table-container">
-            <UxTableNew<TableData>
+            <Table<TableData>
                 columns={columnsFactory()}
-                data={createTableData()}
+                dataSource={createTableData()}
                 loading={isFetching}
                 className="ux-table-with-native-expand"
             />

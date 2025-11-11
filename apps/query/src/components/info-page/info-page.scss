@@ -1,0 +1,17 @@
+.info-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 40px 20px;
+
+    .info-page-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .info-page-description {
+        color: rgba(0, 0, 0, 0.45);
+    }
+}

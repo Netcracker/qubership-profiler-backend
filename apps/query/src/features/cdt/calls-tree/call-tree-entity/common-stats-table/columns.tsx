@@ -1,29 +1,29 @@
 import HighlightCell from '@app/components/highlight-cell/highlight-cell';
 import type { StatsInfo } from '@app/store/cdt-openapi';
-import { type UxTableNewColumn, type UxTableNewData } from '@netcracker/ux-react';
+import type { ColumnsType } from 'antd/es/table';
 
-export type TableData = UxTableNewData<StatsInfo>;
+export type TableData = StatsInfo;
 
-export const columnsFactory = (): UxTableNewColumn<TableData>[] => [
+export const columnsFactory = (): ColumnsType<TableData> => [
     {
-        name: '',
-        type: 'accessor',
-        dataKey: 'name',
+        title: '',
+        key: 'name',
+        dataIndex: 'name',
         width: 200,
-        cellRender: props => {
-            return <span style={{ display: 'inline-flex', gap: 8 }}>{props.getValue()} </span>;
+        render: (value: any) => {
+            return <span style={{ display: 'inline-flex', gap: 8 }}>{value} </span>;
         },
     },
     {
-        name: '',
-        type: 'accessor',
-        dataKey: 'totalTime',
+        title: '',
+        key: 'totalTime',
+        dataIndex: 'totalTime',
         width: 110,
-        cellRender: props => {
+        render: (value: any) => {
             return (
-                props.getValue() && (
+                value && (
                     <span style={{ height: 13, display: 'inline-flex', gap: 8, fontWeight: 500 }}>
-                        {props.getValue()}
+                        {value}
                         {' ms'}
                     </span>
                 )
@@ -31,15 +31,15 @@ export const columnsFactory = (): UxTableNewColumn<TableData>[] => [
         },
     },
     {
-        name: '',
-        type: 'accessor',
-        dataKey: 'totalTimePercent',
+        title: '',
+        key: 'totalTimePercent',
+        dataIndex: 'totalTimePercent',
         width: 110,
-        cellRender: props => {
+        render: (value: any) => {
             return (
-                props.getValue() && (
-                    <HighlightCell highlight={props.getValue() > 90} >
-                        {'(' + props.getValue().toFixed(2) + '%)'}
+                value && (
+                    <HighlightCell highlight={value > 90} >
+                        {'(' + value.toFixed(2) + '%)'}
                     </HighlightCell>
                 )
             );

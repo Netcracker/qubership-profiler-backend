@@ -1,5 +1,6 @@
 import type { CallsTreeInfo } from '@app/store/cdt-openapi';
-import { UxProgress, type UxTableNewColumn, type UxTableNewData } from '@netcracker/ux-react';
+import { Progress } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import TraceButton from '../call-tree-entity/calls-tree-table/trace-button/trace-button';
 import { useAppSelector } from '@app/store/hooks';
 import { selectCallsTreeState } from '@app/store/slices/calls-tree-context-slices';
@@ -7,113 +8,91 @@ import prettyMilliseconds from 'pretty-ms';
 import CallsTreeSearchedElement from '../call-tree-entity/calls-tree-table/calls-tree-searched-element';
 import ParamsButton from '../call-tree-entity/calls-tree-table/params-button/params-button';
 
-export type TableData = UxTableNewData<CallsTreeInfo>;
+export type TableData = CallsTreeInfo;
 
-export const DEFAULT_CALLS_COLUMNS: UxTableNewColumn<TableData>[] = [
+export const DEFAULT_CALLS_COLUMNS: ColumnsType<TableData> = [
     {
-        name: 'Method',
-        type: 'accessor',
-        dataKey: 'info',
-        cellRender: props => <CallsTreeSearchedElement text={props.row.original.info.title} />,
-        minWidth: 437,
+        title: 'Method',
+        key: 'info',
+        dataIndex: 'info',
+        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.info.title} />,
+        width: 437,
     },
     {
-        id: 'params',
-        name: '',
-        type: 'accessor',
-        accessorFn: originalRow => {
-            return originalRow.params;
-        },
-        cellRender: props => (props.row.original.params ? <ParamsButton row={props.row} /> : null),
-        maxWidth: 43,
+        key: 'params',
+        title: '',
+        dataIndex: 'params',
+        render: (_: any, record: CallsTreeInfo) => (record.params ? <ParamsButton row={record} /> : null),
+        width: 43,
     },
     {
-        id: 'hasStackTrace',
-        name: '',
-        type: 'accessor',
-        accessorFn: originalRow => {
-            return originalRow.info;
-        },
-        cellRender: props =>
-            props.row.original.info.hasStackTrace ? <TraceButton text={props.row.original.info.trace || ''} /> : null,
-        maxWidth: 43,
+        key: 'hasStackTrace',
+        title: '',
+        dataIndex: 'info',
+        render: (_: any, record: CallsTreeInfo) =>
+            record.info.hasStackTrace ? <TraceButton text={record.info.trace || ''} /> : null,
+        width: 43,
     },
     {
-        id: 'totalTimePerc',
-        name: 'Total time, %',
-        type: 'accessor',
-        accessorFn: originalRow => {
-            return originalRow.info;
-        },
-        cellRender: props => (
-            <UxProgress.Bar
+        key: 'totalTimePerc',
+        title: 'Total time, %',
+        dataIndex: 'info',
+        render: (_: any, record: CallsTreeInfo) => (
+            <Progress
                 className="progress-bar"
-                percent={props.row.original.timePercent}
+                percent={record.timePercent}
                 showInfo={true}
-                infoPosition="right"
             />
         ),
     },
     {
-        id: 'totalTime',
-        name: 'Total Time',
-        type: 'accessor',
-        accessorFn: originalRow => {
-            return originalRow.time;
-        },
-        cellRender: props => <CallsTreeSearchedElement text={prettyMilliseconds(props.row.original.time.total)} />,
+        key: 'totalTime',
+        title: 'Total Time',
+        dataIndex: 'time',
+        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={prettyMilliseconds(record.time.total)} />,
     },
     {
-        name: 'Total Suspension',
-        type: 'accessor',
-        dataKey: 'suspension',
-        cellRender: props => <CallsTreeSearchedElement text={props.row.original.suspension.total.toString()} />,
+        title: 'Total Suspension',
+        key: 'suspension',
+        dataIndex: 'suspension',
+        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.suspension.total.toString()} />,
     },
     {
-        id: 'selfTime',
-        name: 'Self Time',
-        type: 'accessor',
-        accessorFn: originalRow => {
-            return originalRow.time;
-        },
-        cellRender: props => <CallsTreeSearchedElement text={prettyMilliseconds(props.row.original.time?.self)} />,
+        key: 'selfTime',
+        title: 'Self Time',
+        dataIndex: 'time',
+        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={prettyMilliseconds(record.time?.self)} />,
     },
     {
-        id: 'selfSuspension',
-        name: 'Self Suspension',
-        type: 'accessor',
-        accessorFn: originalRow => {
-            return originalRow.suspension;
-        },
-        cellRender: props => <CallsTreeSearchedElement text={props.row.original.suspension.self.toString()} />,
+        key: 'selfSuspension',
+        title: 'Self Suspension',
+        dataIndex: 'suspension',
+        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.suspension.self.toString()} />,
     },
     {
-        name: 'Invocations',
-        type: 'accessor',
-        dataKey: 'invocations',
-        cellRender: props => <CallsTreeSearchedElement text={props.row.original.invocations.self.toString()} />,
+        title: 'Invocations',
+        key: 'invocations',
+        dataIndex: 'invocations',
+        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.invocations.self.toString()} />,
     },
     {
-        id: 'calls',
-        name: 'Calls',
-        type: 'accessor',
-        accessorFn: originalRow => {
-            return originalRow.info;
-        },
-        cellRender: props => <CallsTreeSearchedElement text={props.row.original.info.calls.toString()} />,
+        key: 'calls',
+        title: 'Calls',
+        dataIndex: 'info',
+        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.info.calls.toString()} />,
     },
 ];
 
-export const CALLS_COLUMNS_KEYS = DEFAULT_CALLS_COLUMNS.map(column => column.name);
+export const CALLS_COLUMNS_KEYS = DEFAULT_CALLS_COLUMNS.map(column => column.key);
 
 export function useSortedCallsColumns() {
     const { columnsOrder } = useAppSelector(selectCallsTreeState);
     return [...DEFAULT_CALLS_COLUMNS].sort(
-        (a, b) => columnsOrder.indexOf(a.name as string) - columnsOrder.indexOf(b.name as string)
+        (a, b) => columnsOrder.indexOf(a.key as string) - columnsOrder.indexOf(b.key as string)
     );
 }
 export function useCallsColumns() {
     const { hiddenColumns } = useAppSelector(selectCallsTreeState);
     const sortedColumns = useSortedCallsColumns();
-    return sortedColumns.filter(column => !hiddenColumns.includes(column.name));
+    return sortedColumns.filter(column => column.key && !hiddenColumns.includes(column.key));
 }

@@ -1,29 +1,29 @@
 import type { ServiceDumpInfo } from '@app/store/cdt-openapi';
-import { UxButton, UxDropdown, UxIcon, UxMenu } from '@netcracker/ux-react';
+import { Button, Dropdown, Menu } from 'antd';
 import { memo } from 'react';
-import { ReactComponent as CloudDownload16Icon } from '@netcracker/ux-assets/icons/cloud-download/cloud-download-16.svg';
+import { CloudDownloadOutlined } from '@ant-design/icons';
 
 const DumpsDownloadOpts = memo<{ opts?: ServiceDumpInfo['downloadOptions'] }>(({ opts }) => {
     if (!opts) return null;
     if (opts.length === 0) return 0;
     return (
-        <UxDropdown
+        <Dropdown
             overlay={
-                <UxMenu>
+                <Menu>
                     {opts?.map(it => (
                         <a href={it.uri} target="_blank" rel="noreferrer" key={it.typeName}>
-                            <UxMenu.Item>{it.typeName}</UxMenu.Item>
+                            <Menu.Item>{it.typeName}</Menu.Item>
                         </a>
                     ))}
-                </UxMenu>
+                </Menu>
             }
         >
-            <UxButton
-                type="light"
+            <Button
+                type="default"
                 size="small"
-                leftIcon={<UxIcon style={{ fontSize: 16 }} component={CloudDownload16Icon} />}
+                icon={<CloudDownloadOutlined />}
             />
-        </UxDropdown>
+        </Dropdown>
     );
 });
 

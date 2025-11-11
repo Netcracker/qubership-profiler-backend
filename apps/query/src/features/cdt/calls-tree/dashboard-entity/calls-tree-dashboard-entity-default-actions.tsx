@@ -1,7 +1,5 @@
-import { UxButton, UxDropdownNew, UxIcon, type UxDropdownNewItem } from '@netcracker/ux-react';
-import { ReactComponent as EditIcon } from '@netcracker/ux-assets/icons/edit/edit-outline-16.svg';
-import { ReactComponent as DeleteIcon } from '@netcracker/ux-assets/icons/delete/delete-outline-16.svg';
-import { ReactComponent as ActionsIcon } from '@netcracker/ux-assets/icons/actions/actions-20.svg';
+import { Button, Dropdown, type MenuProps } from 'antd';
+import { EditOutlined, DeleteOutlined, MoreOutlined } from '@ant-design/icons';
 import type { FC } from 'react';
 import { useDisableWidgetFunction } from '../hooks/use-widgets';
 import { type Widget } from '@app/store/slices/calls-tree-context-slices';
@@ -9,8 +7,8 @@ import { type Widget } from '@app/store/slices/calls-tree-context-slices';
 const DefaultEntityActions: FC<Widget> = ({ i }) => {
     const disableWidget = useDisableWidgetFunction();
 
-    function handleClick(item: UxDropdownNewItem) {
-        switch (item.id) {
+    const handleClick: MenuProps['onClick'] = ({ key }) => {
+        switch (key) {
             case 'edit':
                 console.log('Edit choosen: ', i);
                 break;
@@ -18,27 +16,26 @@ const DefaultEntityActions: FC<Widget> = ({ i }) => {
                 disableWidget(i);
                 break;
         }
-    }
+    };
+
+    const items: MenuProps['items'] = [
+        {
+            key: 'edit',
+            label: 'Edit',
+            icon: <EditOutlined />,
+        },
+        {
+            key: 'remove',
+            label: 'Remove',
+            className: 'amarant-label',
+            icon: <DeleteOutlined />,
+        },
+    ];
 
     return (
-        <UxDropdownNew
-            items={[
-                {
-                    id: 'edit',
-                    text: 'Edit',
-                    leftIcon: <UxIcon style={{ fontSize: 16 }} component={EditIcon} />,
-                },
-                {
-                    id: 'remove',
-                    text: 'Remove',
-                    className: 'amarant-label',
-                    leftIcon: <UxIcon style={{ fontSize: 16 }} component={DeleteIcon} />,
-                },
-            ]}
-            onItemClick={handleClick}
-        >
-            <UxButton type="light" leftIcon={<UxIcon component={ActionsIcon} />} />
-        </UxDropdownNew>
+        <Dropdown menu={{ items, onClick: handleClick }}>
+            <Button type="default" icon={<MoreOutlined />} />
+        </Dropdown>
     );
 };
 

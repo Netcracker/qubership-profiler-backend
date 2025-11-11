@@ -1,7 +1,7 @@
 import { type CallsTreeInfo } from '@app/store/cdt-openapi';
-import { usePopupVisibleState } from '@netcracker/cse-ui-components';
-import { ReactComponent as ParamsIconSvg } from '@netcracker/ux-assets/icons/grid-four/grid-four-outline-16.svg';
-import { UxButton, UxIcon, UxPopupNew, UxTableNew, type UxTableNewRow } from '@netcracker/ux-react';
+import { usePopupVisibleState } from '@app/utils/use-popup-visible-state';
+import { AppstoreOutlined } from '@ant-design/icons';
+import { Button, Modal, Table } from 'antd';
 import { type FC } from 'react';
 import { useCallsTreeData } from '../../../calls-tree-context';
 import classNames from '../../content-controls.module.scss';
@@ -9,7 +9,7 @@ import { columnsFactory, type TableData } from '../../params-table/columns';
 import { createParamsData } from '../../utils/calls-tree-operations';
 
 interface ParamsButtonModel {
-    row: UxTableNewRow<CallsTreeInfo>;
+    row: CallsTreeInfo;
 }
 
 const ParamsButton: FC<ParamsButtonModel> = ({ row }) => {
@@ -19,27 +19,24 @@ const ParamsButton: FC<ParamsButtonModel> = ({ row }) => {
 
     return (
         <div className={classNames.toolControls}>
-            <UxButton type="light" onClick={open}>
-                {<UxIcon style={{ fontSize: 16, color: '#0068FF' }} component={ParamsIconSvg} />}
-            </UxButton>
-            <UxPopupNew
-                visible={visible}
-                header={row.original.info.title}
-                size="large"
-                footer={<UxButton onClick={close}>Close</UxButton>}
-                content={
-                    <UxTableNew<TableData>
-                        columns={columnsFactory()}
-                        data={createParamsData(row.original) as TableData[]}
-                        className="ux-table"
-                        treeData={true}
-                        loading={isFetching}
-                    />
-                }
+            <Button type="default" onClick={open}>
+                <AppstoreOutlined style={{ color: '#0068FF' }} />
+            </Button>
+            <Modal
+                open={visible}
+                title={row.info.title}
+                width={800}
+                footer={<Button onClick={close}>Close</Button>}
                 onOk={close}
                 onCancel={close}
-                onClose={close}
-            />
+            >
+                <Table<TableData>
+                    columns={columnsFactory()}
+                    dataSource={createParamsData(row) as TableData[]}
+                    className="ux-table"
+                    loading={isFetching}
+                />
+            </Modal>
         </div>
     );
 };

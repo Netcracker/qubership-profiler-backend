@@ -1,4 +1,4 @@
-import { UxHeader } from '@netcracker/ux-react/header';
+import { AppHeaderLayout as UxHeader } from '@app/components/app-header-layout/app-header-layout';
 import { type FC, memo } from 'react';
 
 export interface AppHeaderProps {

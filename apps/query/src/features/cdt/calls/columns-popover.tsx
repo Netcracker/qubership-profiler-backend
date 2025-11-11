@@ -1,21 +1,24 @@
 import { useCallsStore, useCallsStoreSelector } from '@app/features/cdt/calls/calls-store';
 import { CALLS_COLUMNS_KEYS, useSortedCallsColumns } from '@app/features/cdt/calls/hooks/use-calls-columns';
-import { type PropertiesItemModel, reorderItems } from '@netcracker/cse-ui-components';
-import { PropertiesList } from '@netcracker/cse-ui-components/components/properties-list/properties-list';
-import { ReactComponent as SettingsOutline20Icon } from '@netcracker/ux-assets/icons/settings/settings-outline-20.svg';
-import { UxButton, UxIcon, UxPopover } from '@netcracker/ux-react';
+import { type PropertiesItemModel } from '@app/components/properties-list/properties-list';
+import { reorderItems } from '@app/utils/reorder-items';
+import { PropertiesList } from '@app/components/properties-list/properties-list';
+import { SettingOutlined } from '@ant-design/icons';
+import { Button, Popover } from 'antd';
 import { type Key, type ReactNode, memo, useCallback } from 'react';
 
 const ColumnsPopover = () => {
     const [columnsOrder, set] = useCallsStore(s => s.columnsOrder);
-    const _columnsOrder = columnsOrder.length ? columnsOrder : CALLS_COLUMNS_KEYS;
+    const _columnsOrder = Array.isArray(columnsOrder) && columnsOrder.length ? columnsOrder : CALLS_COLUMNS_KEYS;
     const hiddenColumns = useCallsStoreSelector(s => s.hiddenColumns);
     const sortedColumns = useSortedCallsColumns();
 
     const handleReorder = useCallback(
         (fromIndex: number, targetIndex: number) => {
-            const newOrder = reorderItems(_columnsOrder, fromIndex, targetIndex);
-            set({ columnsOrder: Array.from(newOrder) });
+            if (Array.isArray(_columnsOrder)) {
+                const newOrder = reorderItems(_columnsOrder, fromIndex, targetIndex);
+                set({ columnsOrder: Array.from(newOrder) });
+            }
         },
         [_columnsOrder, set]
     );
@@ -30,10 +33,9 @@ const ColumnsPopover = () => {
         [hiddenColumns, set]
     );
     return (
-        <UxPopover
+        <Popover
             placement={'bottomRight'}
             title={<span>Properties</span>}
-            arrow={false}
             overlayStyle={{ paddingTop: 0 }}
             content={
                 <>
@@ -50,8 +52,8 @@ const ColumnsPopover = () => {
                 </>
             }
         >
-            <UxButton type="light" leftIcon={<UxIcon component={SettingsOutline20Icon} />} />
-        </UxPopover>
+            <Button type="default" icon={<SettingOutlined />} />
+        </Popover>
     );
 };
 

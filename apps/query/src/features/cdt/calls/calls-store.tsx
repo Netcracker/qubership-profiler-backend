@@ -1,5 +1,5 @@
 import type { CallInfo } from '@app/store/cdt-openapi';
-import { createStoreContext } from '@netcracker/cse-ui-components';
+import { createStoreContext } from '@app/utils/create-store-context';
 import { type FC, type Key } from 'react';
 
 type CallsStoreModel = {
@@ -13,11 +13,7 @@ type CallsStoreModel = {
 
     selectedCalls?: CallInfo[];
 };
-export const {
-    Provider: CallsStoreProvider,
-    useStore: useCallsStore,
-    useStoreSelector: useCallsStoreSelector,
-} = createStoreContext<CallsStoreModel>({
+const storeContext = createStoreContext<CallsStoreModel>({
     graphCollapsed: true,
     durationFrom: 10,
 
@@ -25,7 +21,10 @@ export const {
     hiddenColumns: ['suspend', 'queue-wait-time', 'tx', 'mem'],
     selectedCalls: [],
 });
-CallsStoreProvider.displayName = 'CallsStoreProvider';
+
+export const CallsStoreProvider = storeContext.Provider;
+export const useCallsStore = storeContext.useStore;
+export const useCallsStoreSelector = storeContext.useStoreSelector;
 // eslint-disable-next-line react/display-name
 export const withCallsStore = (Component: FC) => () => {
     return (

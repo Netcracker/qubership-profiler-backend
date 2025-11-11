@@ -1,4 +1,5 @@
-import { ContentCard } from '@netcracker/cse-ui-components';
+import { ContentCard } from '@app/components/content-card/content-card';
+import { Button, Table, Tooltip, Popover, Spin, Tag, Progress, Modal } from 'antd';
 import cn from 'classnames';
 import classNames from './calls-tree-dashboard-entity.module.scss';
 import type { FC } from 'react';

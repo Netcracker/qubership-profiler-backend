@@ -1,4 +1,4 @@
-import { confirmApiFactory } from '@netcracker/cse-ui-components/utils/confirm';
+import { confirmApiFactory } from '@app/utils/confirm';
 
 const { ConfirmMountPoint, confirm, confirmDelete, destroyConfirm, updateConfirm, asyncConfirm } = confirmApiFactory();
 

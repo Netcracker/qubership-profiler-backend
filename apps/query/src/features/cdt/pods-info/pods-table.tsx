@@ -9,13 +9,13 @@ import {
     useGetServicesQuery,
 } from '@app/store/cdt-openapi';
 import { useAppDispatch } from '@app/store/hooks';
-import { ReactComponent as Warning20Icon } from '@netcracker/ux-assets/icons/warning/warning-20.svg';
-import { UxIcon, UxLoader, UxTable } from '@netcracker/ux-react';
+import { WarningOutlined } from '@ant-design/icons';
+import { Spin, Table } from 'antd';
 import { memo, useCallback, useMemo, useState, type FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { columns } from './columns';
 import { useSearchParamsApplied } from '@app/store/slices/context-slices';
-import { InfoPage } from '@netcracker/cse-ui-components';
+import { InfoPage } from '@app/components/info-page/info-page';
 import { isTimeoutError } from '@app/common/guards/errors';
 import {ESC_QUERY_PARAMS} from "@app/constants/query-params";
 
@@ -28,8 +28,8 @@ export type DumpsQueryStore = Record<
     }
 >;
 
-export const warningIcon = <UxIcon style={{ fontSize: 20, color: '#FFB02E' }} component={Warning20Icon} />;
-const tableIndicator = { indicator: <UxLoader /> };
+export const warningIcon = <WarningOutlined style={{ color: '#FFB02E' }} />;
+const tableIndicator = { indicator: <Spin /> };
 const getRowKey = (row: { name: string }) => row.name;
 const tableScroll = { x: 'max-content', y: 'calc(100vh - 500px)' };
 
@@ -153,11 +153,11 @@ const PodsTable: FC = () => {
     );
     if (containersResponse.isError) {
         const message = podsErrorMessage(containersResponse.error);
-        return <InfoPage title="Pods Info is Unavailable." className="dashed-info-page" message={message} />;
+        return <InfoPage title="Pods Info is Unavailable." className="dashed-info-page" description={message} />;
     }
     return (
         <div className="table-container">
-            <UxTable
+            <Table
                 columns={columns}
                 dataSource={dataSource}
                 rowKey={getRowKey}

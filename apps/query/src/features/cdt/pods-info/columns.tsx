@@ -1,7 +1,7 @@
 import { userLocale } from '@app/common/user-locale';
 import DumpsDownloadOpts from '@app/features/cdt/pods-info/dumps-download-opts';
 import type { ServiceDumpInfo } from '@app/store/cdt-openapi';
-import { UxChip, UxLoader, UxTooltip } from '@netcracker/ux-react';
+import { Tag, Spin, Tooltip } from 'antd';
 import type { ColumnType } from 'antd/lib/table';
 import { warningIcon } from './pods-table';
 
@@ -28,8 +28,8 @@ export const columns: ColumnType<any>[] = [
             <span style={{ display: 'inline-flex', gap: 8 }}>
                 {name}{' '}
                 <>
-                    {row?.fetching && <UxLoader size="small" />}{' '}
-                    {row?.error && <UxTooltip description={JSON.stringify(row.error)}>{warningIcon}</UxTooltip>}
+                    {row?.fetching && <Spin size="small" />}{' '}
+                    {row?.error && <Tooltip title={JSON.stringify(row.error)}>{warningIcon}</Tooltip>}
                 </>
             </span>
         ),

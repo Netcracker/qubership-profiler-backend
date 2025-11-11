@@ -1,10 +1,10 @@
 import { CALLS_COLUMNS_KEYS, useSortedCallsColumns } from '@app/features/cdt/calls-tree/hooks/use-calls-tree-columns';
 import { useAppDispatch, useAppSelector } from '@app/store/hooks';
 import { callsTreeContextDataAction, selectCallsTreeState } from '@app/store/slices/calls-tree-context-slices';
-import { type PropertiesItemModel } from '@netcracker/cse-ui-components';
-import { PropertiesList } from '@netcracker/cse-ui-components/components/properties-list/properties-list';
-import { ReactComponent as SettingsOutline20Icon } from '@netcracker/ux-assets/icons/settings/settings-outline-20.svg';
-import { UxButton, UxIcon, UxPopoverNew } from '@netcracker/ux-react';
+import { type PropertiesItemModel } from '@app/components/properties-list/properties-list';
+import { PropertiesList } from '@app/components/properties-list/properties-list';
+import { SettingOutlined } from '@ant-design/icons';
+import { Button, Popover } from 'antd';
 import { memo, useCallback, type Key, type ReactNode } from 'react';
 
 const ColumnsPopover = () => {
@@ -25,26 +25,26 @@ const ColumnsPopover = () => {
         [hiddenColumns]
     );
     return (
-        <UxPopoverNew
-            placement={'bottom-end'}
-            header={<span>Properties</span>}
+        <Popover
+            placement={'bottomRight'}
+            title={<span>Properties</span>}
             content={
                 <>
                     <PropertiesList
                         // onReorder={handleReorder}
                         items={sortedColumns.map(col => ({
-                            label: col.name as ReactNode,
-                            value: col.name as Key,
+                            label: col.title as ReactNode,
+                            value: col.key as Key,
                             data: col,
-                            hidden: hiddenColumns.includes(col.name),
+                            hidden: !!(col.key && hiddenColumns.includes(col.key)),
                         }))}
                         onToggle={handleToggle}
                     />
                 </>
             }
         >
-            <UxButton type="light" leftIcon={<UxIcon component={SettingsOutline20Icon} />} />
-        </UxPopoverNew>
+            <Button type="default" icon={<SettingOutlined />} />
+        </Popover>
     );
 };
 

@@ -2,7 +2,7 @@ import { extractErrorMessageFromBeError } from '@app/common/errors/error-utils';
 import { isInvalidTokenError } from '@app/common/guards/errors';
 import { userLocale } from '@app/common/user-locale';
 import { API_BASE_URL } from '@app/constants/app.constants';
-import { uxNotificationHelper } from '@netcracker/ux-react';
+import { uxNotificationHelper } from '@app/utils/notification';
 import {
     type BaseQueryFn,
     type FetchArgs,

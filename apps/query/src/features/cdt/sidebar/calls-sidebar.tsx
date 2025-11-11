@@ -1,8 +1,7 @@
 import { type FC } from 'react';
-import { ReactComponent as FlowTree20Icon } from '@netcracker/ux-assets/icons/flow-tree/flow-tree-20.svg';
-import { ReactComponent as ChevronCollapse20Icon } from '@netcracker/ux-assets/icons/chevron-collapse/chevron-collapse-20.svg';
+import { ClusterOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import classNames from './calls-sidebar.module.scss';
-import { UxButton, UxIcon, UxMenu, UxTooltip } from '@netcracker/ux-react';
+import { Button, Menu, Tooltip } from 'antd';
 import { useAppDispatch, useAppSelector } from '@app/store/hooks';
 import { appDataActions, selectSiderCollapsed } from '@app/store/slices/app-state.slice';
 import clsx from 'clsx';
@@ -15,28 +14,27 @@ const CallsSideBar: FC = () => {
         <aside className={clsx(classNames.sidebar, collapsed && classNames.collapsed)}>
             <h3 className="ux-typography-13px-semibold">Namespaces</h3>
             {collapsed && (
-                <UxMenu mode="vertical" selectedKeys={['tree']}>
-                    <UxMenu.Item
+                <Menu mode="vertical" selectedKeys={['tree']}>
+                    <Menu.Item
                         key="tree"
                         onClick={() => dispatch(appDataActions.toggleSiderCollapsed())}
                         icon={
-                            <UxTooltip title="Namespaces" placement="right">
-                                <UxIcon component={FlowTree20Icon} />{' '}
-                            </UxTooltip>
+                            <Tooltip title="Namespaces" placement="right">
+                                <ClusterOutlined />
+                            </Tooltip>
                         }
                     />
-                </UxMenu>
+                </Menu>
             )}
             {!collapsed && <NamespacesTree />}
             <div className={classNames.footer}>
-                <UxButton
+                <Button
                     onClick={() => dispatch(appDataActions.toggleSiderCollapsed())}
                     type="text"
-                    color="blue"
-                    leftIcon={<UxIcon component={ChevronCollapse20Icon} />}
+                    icon={<MenuFoldOutlined />}
                 >
                     Collapse
-                </UxButton>
+                </Button>
             </div>
         </aside>
     );

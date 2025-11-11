@@ -1,50 +1,45 @@
 import { asyncConfirm } from '@app/components/confirm';
 import { getDownloadDumpUrl, useDeleteDumpByIdMutation, type HeapDumpInfo } from '@app/store/cdt-openapi';
-import { ReactComponent as DeleteOutline16Icon } from '@netcracker/ux-assets/icons/delete/delete-outline-16.svg';
-import { ReactComponent as Download16Icon } from '@netcracker/ux-assets/icons/download/download-16.svg';
-import { UxButton, UxIcon } from '@netcracker/ux-react';
+import { DeleteOutlined, DownloadOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import { memo, useCallback } from 'react';
 import classNames from './heap-dumps-table.module.scss';
 
-const iconStyle = { fontSize: 16 };
 function TrowActions(heapInfo: HeapDumpInfo) {
     const { dumpId, pod } = heapInfo;
     const [deleteDump] = useDeleteDumpByIdMutation();
     const handleDeleteDump = useCallback(async () => {
-        await asyncConfirm(
-            {
-                key: 'delete-dump',
-                okButtonProps: {
-                    color: 'red',
-                },
-                title: 'Delete Heap Dump?',
-                header: 'delete-dump'
+        const confirmed = await asyncConfirm({
+            title: 'Delete Heap Dump?',
+            okButtonProps: {
+                danger: true,
             },
-            () =>
-                deleteDump({
-                    dumpId: dumpId,
-                    dumpType: 'heap',
-                    podId: pod,
-                })
-        );
+        });
+        if (confirmed) {
+            await deleteDump({
+                dumpId: dumpId,
+                dumpType: 'heap',
+                podId: pod,
+            });
+        }
     }, [deleteDump, dumpId, pod]);
 
     return (
         <div className="flex g-4">
-            <UxButton
+            <Button
                 className={classNames.pigeonButtons}
                 href={getDownloadDumpUrl({ dumpId: heapInfo.dumpId, dumpType: 'heap', podId: heapInfo.pod })}
                 target="_blank"
-                type="light"
+                type="default"
                 size="small"
-                leftIcon={<UxIcon style={iconStyle} component={Download16Icon} />}
+                icon={<DownloadOutlined />}
             />
-            <UxButton
+            <Button
                 className={classNames.pigeonButtons}
                 onClick={handleDeleteDump}
-                type="light"
+                type="default"
                 size="small"
-                leftIcon={<UxIcon style={iconStyle} component={DeleteOutline16Icon} />}
+                icon={<DeleteOutlined />}
             />
         </div>
     );

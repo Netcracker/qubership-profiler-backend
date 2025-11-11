@@ -1,15 +1,15 @@
 import type { CallParameter } from '@app/store/cdt-openapi';
-import { type UxTableNewColumn, type UxTableNewData } from '@netcracker/ux-react';
+import type { ColumnsType } from 'antd/es/table';
 
-export type TableData = UxTableNewData<CallParameter>;
+export type TableData = CallParameter;
 
-export const columnsFactory = (): UxTableNewColumn<TableData>[] => [
+export const columnsFactory = (): ColumnsType<TableData> => [
     {
-        name: 'Parameter',
-        type: 'accessor',
-        dataKey: 'id',
-        cellRender: props => {
-            return props.getValue();
+        title: 'Parameter',
+        key: 'id',
+        dataIndex: 'id',
+        render: (value: any) => {
+            return value;
         },
     },
 ];

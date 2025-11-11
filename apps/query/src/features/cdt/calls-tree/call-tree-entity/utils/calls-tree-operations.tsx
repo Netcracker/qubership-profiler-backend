@@ -1,13 +1,15 @@
 import type { CallParameterView, CallStatsInfo, CallsTreeInfo } from '@app/store/cdt-openapi';
 import prettyMilliseconds from 'pretty-ms';
 
-function formatValues(values: any[], type: string): CallParameterView[] {
+function formatValues(values: unknown[], type: string): CallParameterView[] {
     const res: CallParameterView[] = [];
     values.forEach(v => {
-        if (type == 'Date') v = new Date(v);
-        else if (type == 'Duration') v = prettyMilliseconds(v);
+        let formattedValue: string;
+        if (type == 'Date') formattedValue = new Date(v as number).toString();
+        else if (type == 'Duration') formattedValue = prettyMilliseconds(v as number);
+        else formattedValue = String(v);
         res.push({
-            id: v,
+            id: formattedValue,
         });
     });
     return res;

@@ -2,7 +2,6 @@ import { createDraftSafeSelector, createSlice, type PayloadAction } from '@redux
 import type { Layout } from 'react-grid-layout';
 import type { RootState } from '../types';
 import type { Key } from 'react';
-import type { CallsTreeInfo } from '../cdt-openapi';
 
 type WidgetType = 'frame-graph' | 'calls-tree' | 'stats';
 

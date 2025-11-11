@@ -9,13 +9,14 @@ const StatsTable: FC = () => {
 
     function createTableData(): StatsInfo[] {
         if (data) {
-            const totalTime = data.info.reduce((a, b) => (a + b.values.at(0)) as number, 0);
+            const totalTime = data.info.reduce((a, b) => a + (b.values.at(0) as number), 0);
             const res: StatsInfo[] = [];
             data.info.forEach(p => {
+                const timeValue = p.values.at(0) as number;
                 res.push({
                     name: p.id,
-                    totalTime: p.values.at(0),
-                    totalTimePercent: (p.values.at(0) as number) / totalTime,
+                    totalTime: timeValue,
+                    totalTimePercent: timeValue / totalTime,
                 });
             });
             return res;

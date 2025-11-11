@@ -58,8 +58,8 @@ export const cdtOpenapi = api.injectEndpoints({
             }),
         }),
         downloadDumpById: build.mutation<DownloadDumpByIdResp, DownloadDumpByIdArg>({
-            query: queryArg => ({
-                url: `/cdt/v2/dumps/${queryArg.podId}/${queryArg.dumpType}/${queryArg.dumpId}`,
+            query: () => ({
+                url: `/cdt/v2/dumps`,
             }),
         }),
         deleteDumpById: build.mutation<DeleteDumpByIdResp, DeleteDumpByIdArg>({
@@ -294,7 +294,7 @@ export type ErrorDto = {
     userMessage?: string;
     stackTrace?: string;
 };
-export type Page = any;
+export type Page = number;
 export type ServiceTags = 'java' | 'go';
 export type ServicePodDto = {
     namespace?: string;
@@ -421,7 +421,7 @@ export type CallsLoadRequest = {
         sortOrder: boolean;
     };
 };
-export type AnyValue = any;
+export type AnyValue = unknown;
 export type PodMeta = {
     podId?: number;
     namespace?: string;

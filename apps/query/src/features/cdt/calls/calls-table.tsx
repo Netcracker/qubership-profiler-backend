@@ -3,7 +3,6 @@ import ContentControls from '@app/features/cdt/calls/content-controls';
 import { useCallsColumns } from '@app/features/cdt/calls/hooks/use-calls-columns';
 import ResizableTitle, { type ResizableTitleProps } from '@app/components/table-components/resizable-title';
 import useCallsFetchArg from '@app/features/cdt/calls/use-calls-fetch-arg';
-import type { Call } from '@app/models/calls';
 import { type CallInfo, useGetCallsByConditionQuery } from '@app/store/cdt-openapi';
 import { useAppDispatch, useAppSelector } from '@app/store/hooks';
 import { contextDataAction } from '@app/store/slices/context-slices';
@@ -141,12 +140,12 @@ const CallsTable: FC = memo(() => {
     const tableComponents = useMemo(() => {
         return {
             header: {
-                cell: (props: any) => {
+                cell: (props: React.HTMLAttributes<HTMLTableCellElement>) => {
                     return <ResizableTitle {...props} />;
                 },
             },
             body: {
-                wrapper: (props: any) => <div ref={tableBodyRef} onScroll={handleBottomReached} {...props} />,
+                wrapper: (props: React.HTMLAttributes<HTMLDivElement>) => <div ref={tableBodyRef} onScroll={handleBottomReached} {...props} />,
             },
         } as TableProps<CallInfo>['components'];
     }, [handleBottomReached]);

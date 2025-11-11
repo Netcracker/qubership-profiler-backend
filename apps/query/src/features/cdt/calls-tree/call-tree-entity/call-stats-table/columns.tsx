@@ -10,7 +10,7 @@ export const columnsFactory = (): ColumnsType<TableData> => [
         key: 'name',
         dataIndex: 'name',
         width: 115,
-        render: (value: any) => {
+        render: (value: CallStatsInfo['name'], record: CallStatsInfo) => {
             return value;
         },
     },
@@ -19,9 +19,9 @@ export const columnsFactory = (): ColumnsType<TableData> => [
         key: 'self',
         dataIndex: 'self',
         width: 158,
-        render: (value: any, record: CallStatsInfo) => {
+        render: (value: CallStatsInfo['self'], record: CallStatsInfo): React.ReactNode => {
             if (record.total) return prettyMilliseconds(Number(value));
-            return value;
+            return value as React.ReactNode;
         },
     },
     {
@@ -29,7 +29,7 @@ export const columnsFactory = (): ColumnsType<TableData> => [
         key: 'total',
         dataIndex: 'total',
         width: 131,
-        render: (value: any) => {
+        render: (value: CallStatsInfo['total'], record: CallStatsInfo) => {
             if (value) {
                 return prettyMilliseconds(value);
             }

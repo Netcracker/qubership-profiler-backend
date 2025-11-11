@@ -8,10 +8,9 @@ import { Button, Popover } from 'antd';
 import { memo, useCallback, type Key, type ReactNode } from 'react';
 
 const ColumnsPopover = () => {
-    const { columnsOrder, hiddenColumns } = useAppSelector(selectCallsTreeState);
+    const { hiddenColumns } = useAppSelector(selectCallsTreeState);
     const dispatch = useAppDispatch();
 
-    const _columnsOrder = columnsOrder.length ? columnsOrder : CALLS_COLUMNS_KEYS;
     const sortedColumns = useSortedCallsColumns();
 
     const handleToggle = useCallback(
@@ -22,7 +21,7 @@ const ColumnsPopover = () => {
                 dispatch(callsTreeContextDataAction.setHiddenColumns([...hiddenColumns, item.value]));
             }
         },
-        [hiddenColumns]
+        [hiddenColumns, dispatch]
     );
     return (
         <Popover

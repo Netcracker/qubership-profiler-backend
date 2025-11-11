@@ -15,7 +15,6 @@ const ResizableTitle: FC<ResizableTitleProps> = ({
     onResizeStop,
     onResizeStart,
     resizable,
-    columnKey,
     ...rest
 }) => {
     const onResizeClick = useCallback((e: SyntheticEvent) => e.stopPropagation(), []);

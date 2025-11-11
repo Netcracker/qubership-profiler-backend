@@ -4,6 +4,7 @@ import { useSidebarApiArgs } from '@app/features/cdt/hooks/use-sidebar-api-args'
 import { createPodsInfoTableDataSource } from '@app/features/cdt/pods-info/utils/tree-utils';
 import {
     type GetServicesDumpsResp,
+    type ServiceDumpInfo,
     cdtOpenapi,
     useGetNamespacesByRangeQuery,
     useGetServicesQuery,
@@ -28,9 +29,18 @@ export type DumpsQueryStore = Record<
     }
 >;
 
+export type PodsTableRow = Partial<ServiceDumpInfo> & {
+    type?: 'namespace' | 'service';
+    namespace?: string;
+    name?: string;
+    fetching?: boolean;
+    error?: unknown;
+    children?: PodsTableRow[];
+};
+
 export const warningIcon = <WarningOutlined style={{ color: '#FFB02E' }} />;
 const tableIndicator = { indicator: <Spin /> };
-const getRowKey = (row: { name: string }) => row.name;
+const getRowKey = (row: { name?: string }) => row.name ?? '';
 const tableScroll = { x: 'max-content', y: 'calc(100vh - 500px)' };
 
 function podsErrorMessage(error: unknown) {
@@ -85,8 +95,8 @@ const PodsTable: FC = () => {
 
     // TODO: Refactor IT!
     const handleExpand = useCallback(
-        async (expanded: boolean, row: any) => {
-            if (row.type === 'service') {
+        async (expanded: boolean, row: PodsTableRow) => {
+            if (row.type === 'service' && row.namespace && row.name) {
                 setDumpResponses(resps => {
                     return {
                         ...resps,

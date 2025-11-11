@@ -10,7 +10,7 @@ export const columnsFactory = (): ColumnsType<TableData> => [
         key: 'name',
         dataIndex: 'name',
         width: 200,
-        render: (value: any) => {
+        render: (value: StatsInfo['name'], record: StatsInfo) => {
             return <span style={{ display: 'inline-flex', gap: 8 }}>{value} </span>;
         },
     },
@@ -19,7 +19,7 @@ export const columnsFactory = (): ColumnsType<TableData> => [
         key: 'totalTime',
         dataIndex: 'totalTime',
         width: 110,
-        render: (value: any) => {
+        render: (value: StatsInfo['totalTime'], record: StatsInfo) => {
             return (
                 value && (
                     <span style={{ height: 13, display: 'inline-flex', gap: 8, fontWeight: 500 }}>
@@ -35,7 +35,7 @@ export const columnsFactory = (): ColumnsType<TableData> => [
         key: 'totalTimePercent',
         dataIndex: 'totalTimePercent',
         width: 110,
-        render: (value: any) => {
+        render: (value: StatsInfo['totalTimePercent'], record: StatsInfo) => {
             return (
                 value && (
                     <HighlightCell highlight={value > 90} >

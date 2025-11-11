@@ -12,5 +12,5 @@ export type PodModel = {
     hasTops: boolean;
     hasTD: boolean;
     onlineNow: boolean;
-    heapDumps?: any[];
+    heapDumps?: unknown[];
 };

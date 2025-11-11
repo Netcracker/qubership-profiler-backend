@@ -1,18 +1,15 @@
 import { useCallsStore } from '@app/features/cdt/calls/calls-store';
 
-import { useSearchParamsApplied } from "@app/store/slices/context-slices";
 import useCallsFetchArg from "@app/features/cdt/calls/use-calls-fetch-arg";
-import { useGetCallsByConditionQuery } from '@app/store/cdt-openapi';
 import { createExportUrl, createCallUrl } from '@app/features/cdt/calls/create-call-url';
 
 import { DownloadOutlined, ExportOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 
 const CallsControls = () => {
-    const [selectedCalls, set] = useCallsStore(s => s.selectedCalls);
+    const [selectedCalls] = useCallsStore(s => s.selectedCalls);
     const openCallsDisabled = !selectedCalls || !Array.isArray(selectedCalls) || selectedCalls.length === 0;
-    const searchParamsApplied = useSearchParamsApplied();
-    const [callRequest, { shouldSkip, notReady }] = useCallsFetchArg();
+    const [callRequest] = useCallsFetchArg();
 
     const [graphCollapsed, setGraphCollapsed] = useCallsStore(s => s.graphCollapsed);
 

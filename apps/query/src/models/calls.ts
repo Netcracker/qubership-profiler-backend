@@ -1,4 +1,4 @@
-export type Call = any[];
+export type Call = unknown[];
 
 type PodMeta = {
     podId: number;

@@ -8,7 +8,7 @@ export const columnsFactory = (): ColumnsType<TableData> => [
         title: 'Parameter',
         key: 'id',
         dataIndex: 'id',
-        render: (value: any) => {
+        render: (value: CallParameter['id'], record: CallParameter) => {
             return value;
         },
     },

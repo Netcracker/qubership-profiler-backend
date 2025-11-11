@@ -5,7 +5,7 @@ export type Range = {
     readonly unit: keyof Duration;
     readonly value: number;
 };
-export const fastRanges: Readonly<Range[]> = [
+export const fastRanges = [
     {
         label: 'Last 15 min',
         unit: 'minutes',
@@ -26,9 +26,9 @@ export const fastRanges: Readonly<Range[]> = [
         unit: 'hours',
         value: 4,
     },
-];
+] as const satisfies readonly Range[];
 
-export const defaultSelectedRange = fastRanges[0]!;
+export const defaultSelectedRange = fastRanges[0];
 export const defaultRange = {
     dateFrom: sub(new Date(), { [defaultSelectedRange.unit]: defaultSelectedRange.value })
         .getTime()

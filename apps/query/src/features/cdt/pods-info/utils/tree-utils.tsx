@@ -3,16 +3,6 @@ import type { ContainersInfoItem } from '@app/models/containers';
 import type { PodModel } from '@app/models/pods';
 import type { Container, GetServicesResp, ServiceDumpInfo } from '@app/store/cdt-openapi';
 
-const getChildrenType = (container: ContainersInfoItem) => {
-    switch (container.kind) {
-        case 'ns':
-            return 'srv';
-        case 'pod':
-            return undefined;
-        case 'srv':
-            return 'pod';
-    }
-};
 type AccumulatedStats = Omit<PodModel, 'podName' | 'serviceName'> & {
     children?: AccumulatedStats[];
     name: string;
@@ -115,7 +105,7 @@ export const createPodsInfoTableDataSource = (
             accumulateStatsByDump(containerStats, stats);
             return {
                 ...service,
-                type: 'service',
+                type: 'service' as const,
                 name: service.name,
                 namespace: container.namespace,
                 fetching: response?.fetching,
@@ -125,7 +115,7 @@ export const createPodsInfoTableDataSource = (
         });
         return {
             ...container,
-            type: 'namespace',
+            type: 'namespace' as const,
             name: container.namespace,
             children: services,
             ...containerStats,

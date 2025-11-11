@@ -1,5 +1,4 @@
 import { notification } from 'antd';
-import type { ArgsProps } from 'antd/es/notification';
 
 interface NotificationOptions {
     title?: string;

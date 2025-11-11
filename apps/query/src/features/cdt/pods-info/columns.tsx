@@ -1,7 +1,8 @@
 import { userLocale } from '@app/common/user-locale';
 import DumpsDownloadOpts from '@app/features/cdt/pods-info/dumps-download-opts';
 import type { ServiceDumpInfo } from '@app/store/cdt-openapi';
-import { Tag, Spin, Tooltip } from 'antd';
+import type { PodsTableRow } from './pods-table';
+import { Spin, Tooltip } from 'antd';
 import type { ColumnType } from 'antd/lib/table';
 import { warningIcon } from './pods-table';
 
@@ -18,12 +19,12 @@ import { warningIcon } from './pods-table';
 //     downloadOptions?: DownloadOptions[];
 //     onlineNow?: OnlineNow;
 // };
-export const columns: ColumnType<any>[] = [
+export const columns: ColumnType<PodsTableRow>[] = [
     {
         title: 'Service',
         key: 'name',
         dataIndex: 'name',
-        render: (name: string, row) => (
+        render: (name: PodsTableRow['name'], row: PodsTableRow) => (
             // TODO: make error pretty
             <span style={{ display: 'inline-flex', gap: 8 }}>
                 {name}{' '}
@@ -39,8 +40,8 @@ export const columns: ColumnType<any>[] = [
         key: 'container start date',
         dataIndex: 'startTime',
         width: 200,
-        render: (value?: number, row?) =>
-            row.type != 'service' && row.type != 'namespace' &&
+        render: (value?: number, row?: PodsTableRow) =>
+            row && row.type != 'service' && row.type != 'namespace' &&
             value && (
                 <time title={new Date(value).toISOString()} dateTime={new Date(value).toISOString()}>
                     {new Date(value).toLocaleString(userLocale)}

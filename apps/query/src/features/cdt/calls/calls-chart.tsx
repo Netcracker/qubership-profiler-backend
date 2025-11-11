@@ -1,7 +1,7 @@
 import ReactEcharts from "echarts-for-react";
 import useCallsFetchArg from '@app/features/cdt/calls/use-calls-fetch-arg';
-import { useCallsStore, useCallsStoreSelector } from '@app/features/cdt/calls/calls-store';
-import { type CallInfo, useGetCallsStatisticsByConditionQuery } from '@app/store/cdt-openapi';
+import { useCallsStoreSelector } from '@app/features/cdt/calls/calls-store';
+import { useGetCallsStatisticsByConditionQuery } from '@app/store/cdt-openapi';
 import classNames from "@app/features/cdt/calls/calls-chart.module.scss";
 import { unix } from 'moment';
 import {userLocale} from "@app/common/user-locale";
@@ -18,7 +18,7 @@ interface EChartsFormatterParam {
 
 const CallsChart = () => {
     const [callRequest, {shouldSkip, notReady}] = useCallsFetchArg();
-    const {isFetching, data, isError, error, refetch} = useGetCallsStatisticsByConditionQuery(callRequest, {
+    const {data} = useGetCallsStatisticsByConditionQuery(callRequest, {
         skip: shouldSkip,
     });
 

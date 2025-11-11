@@ -44,7 +44,6 @@ const CallsTreeTable: FC = () => {
             const expandedKeys = getExpandedRowsBySearch(callsTreeQuery)(data.children);
             setExpandedRowKeys(expandedKeys);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [callsTreeQuery, data]);
 
     return (

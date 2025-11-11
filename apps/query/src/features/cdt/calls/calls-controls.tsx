@@ -13,20 +13,8 @@ const CallsControls = () => {
     const openCallsDisabled = !selectedCalls || !Array.isArray(selectedCalls) || selectedCalls.length === 0;
     const searchParamsApplied = useSearchParamsApplied();
     const [callRequest, { shouldSkip, notReady }] = useCallsFetchArg();
-    console.log(callRequest.filters.duration);
-
 
     const [graphCollapsed, setGraphCollapsed] = useCallsStore(s => s.graphCollapsed);
-
-    // const [callRequest, { shouldSkip, notReady }] = useCallsFetchArg();
-    // const { isFetching, data, isError, error, refetch } = useGetCallsByConditionQuery(callRequest, {
-    //     skip: shouldSkip,
-    // });
-    // const showGraphDisabled = !data?.calls || data.calls.length == 0;
-
-    // console.log("calls");
-    // console.log(data?.calls?.length);
-    // console.log(showGraphDisabled);
 
     const handleHideGraph = () => {
         setGraphCollapsed({graphCollapsed: !graphCollapsed})

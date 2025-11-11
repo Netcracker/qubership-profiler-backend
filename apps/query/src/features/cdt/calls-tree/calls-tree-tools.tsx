@@ -14,11 +14,15 @@ import {
 import { useEnableWidgetFunction } from './hooks/use-widgets';
 
 export const CallsTreeBackToOverviewButton = () => {
+    const handleClick = () => {
+        // TODO: Implement navigation back to overview
+    };
+
     return (
         <Button
             type="default"
             icon={<ArrowLeftOutlined />}
-            onClick={() => console.log('Back to overview clicked')}
+            onClick={handleClick}
         >
             Back to Overview
         </Button>

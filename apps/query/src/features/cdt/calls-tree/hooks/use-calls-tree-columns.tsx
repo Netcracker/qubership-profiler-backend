@@ -15,21 +15,21 @@ export const DEFAULT_CALLS_COLUMNS: ColumnsType<TableData> = [
         title: 'Method',
         key: 'info',
         dataIndex: 'info',
-        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.info.title} />,
+        render: (value: CallsTreeInfo['info'], record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.info.title} />,
         width: 437,
     },
     {
         key: 'params',
         title: '',
         dataIndex: 'params',
-        render: (_: any, record: CallsTreeInfo) => (record.params ? <ParamsButton row={record} /> : null),
+        render: (value: CallsTreeInfo['params'], record: CallsTreeInfo) => (record.params ? <ParamsButton row={record} /> : null),
         width: 43,
     },
     {
         key: 'hasStackTrace',
         title: '',
         dataIndex: 'info',
-        render: (_: any, record: CallsTreeInfo) =>
+        render: (value: CallsTreeInfo['info'], record: CallsTreeInfo) =>
             record.info.hasStackTrace ? <TraceButton text={record.info.trace || ''} /> : null,
         width: 43,
     },
@@ -37,7 +37,7 @@ export const DEFAULT_CALLS_COLUMNS: ColumnsType<TableData> = [
         key: 'totalTimePerc',
         title: 'Total time, %',
         dataIndex: 'info',
-        render: (_: any, record: CallsTreeInfo) => (
+        render: (value: CallsTreeInfo['info'], record: CallsTreeInfo) => (
             <Progress
                 className="progress-bar"
                 percent={record.timePercent}
@@ -49,37 +49,37 @@ export const DEFAULT_CALLS_COLUMNS: ColumnsType<TableData> = [
         key: 'totalTime',
         title: 'Total Time',
         dataIndex: 'time',
-        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={prettyMilliseconds(record.time.total)} />,
+        render: (value: CallsTreeInfo['time'], record: CallsTreeInfo) => <CallsTreeSearchedElement text={prettyMilliseconds(record.time.total)} />,
     },
     {
         title: 'Total Suspension',
         key: 'suspension',
         dataIndex: 'suspension',
-        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.suspension.total.toString()} />,
+        render: (value: CallsTreeInfo['suspension'], record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.suspension.total.toString()} />,
     },
     {
         key: 'selfTime',
         title: 'Self Time',
         dataIndex: 'time',
-        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={prettyMilliseconds(record.time?.self)} />,
+        render: (value: CallsTreeInfo['time'], record: CallsTreeInfo) => <CallsTreeSearchedElement text={prettyMilliseconds(record.time?.self)} />,
     },
     {
         key: 'selfSuspension',
         title: 'Self Suspension',
         dataIndex: 'suspension',
-        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.suspension.self.toString()} />,
+        render: (value: CallsTreeInfo['suspension'], record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.suspension.self.toString()} />,
     },
     {
         title: 'Invocations',
         key: 'invocations',
         dataIndex: 'invocations',
-        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.invocations.self.toString()} />,
+        render: (value: CallsTreeInfo['invocations'], record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.invocations.self.toString()} />,
     },
     {
         key: 'calls',
         title: 'Calls',
         dataIndex: 'info',
-        render: (_: any, record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.info.calls.toString()} />,
+        render: (value: CallsTreeInfo['info'], record: CallsTreeInfo) => <CallsTreeSearchedElement text={record.info.calls.toString()} />,
     },
 ];
 

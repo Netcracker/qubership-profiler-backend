@@ -1,4 +1,4 @@
-import { memo, type FC, useEffect } from 'react';
+import { memo, type FC, useCallback, useEffect } from 'react';
 import classNames from './calls-tree-page.module.scss';
 import RGL, { WidthProvider } from 'react-grid-layout';
 import CallsTreeDashboardEntity from './dashboard-entity/calls-tree-dashboard-entity';
@@ -19,15 +19,15 @@ const CallsTreeDashboard: FC = () => {
     const { panels } = useAppSelector(selectDashboardState);
     const dispatch = useAppDispatch();
 
-    const onLayoutChange = (layouts: RGL.Layout[]) => {
+    const onLayoutChange = useCallback((layouts: RGL.Layout[]) => {
         dispatch(callsTreeContextDataAction.setLayout(layouts));
-    };
+    }, [dispatch]);
 
     useEffect(() => {
         if (initialPanelState) {
             onLayoutChange(initialPanelState)
         }
-    }, [])
+    }, [initialPanelState, onLayoutChange])
 
     return (
         <div className={classNames.dashboard}>

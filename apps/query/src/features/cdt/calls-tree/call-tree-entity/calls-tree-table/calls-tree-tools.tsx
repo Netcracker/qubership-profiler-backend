@@ -63,7 +63,6 @@ const CallTreeTableTools: FC = () => {
     const handleClick: MenuProps['onClick'] = ({ key }) => {
         switch (key) {
             case 'labelsManagement':
-                console.log('Labels managemenet choosen');
                 break;
             case 'remove':
                 disableWidget('calls-tree');

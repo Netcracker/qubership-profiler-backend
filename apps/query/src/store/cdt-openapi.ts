@@ -72,18 +72,13 @@ export const cdtOpenapi = api.injectEndpoints({
         getCallsByCondition: build.query<GetCallsByConditionResp, GetCallsByConditionArg>({
             query: queryArg => ({ url: `/cdt/v2/calls/load`, method: 'POST', body: queryArg }),
             merge: (currentCacheData, responseData, otherArgs) => {
-                // console.log("merge1")
                 if (currentCacheData) {
-                    // console.log("merge2")
                     // First page load - clearing cache
                     if (otherArgs.arg.view?.page === 1) {
                         return responseData;
                     }
-                    // console.log("merge3")
                     const { calls = [] } = currentCacheData;
-                    // console.log(calls.length)
                     const { calls: newCalls = [] } = responseData;
-                    // console.log(newCalls.length)
                     return { calls: [...calls, ...newCalls], status: responseData.status };
                 }
             },

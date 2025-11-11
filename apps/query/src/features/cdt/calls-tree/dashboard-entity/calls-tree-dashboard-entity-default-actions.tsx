@@ -10,7 +10,6 @@ const DefaultEntityActions: FC<Widget> = ({ i }) => {
     const handleClick: MenuProps['onClick'] = ({ key }) => {
         switch (key) {
             case 'edit':
-                console.log('Edit choosen: ', i);
                 break;
             case 'remove':
                 disableWidget(i);

@@ -46,39 +46,57 @@ const CallsTable: FC = memo(() => {
     const [, set] = useCallsStore(s => s);
     const dispatch = useAppDispatch();
     const containerRef = useRef<HTMLDivElement>(null);
+    const tableBodyRef = useRef<HTMLDivElement>(null);
     const storedColumnWidths = useAppSelector(selectCallsColumnWidths);
     const [columnWidths, setColumnWidths] = useState<ColumnWidthsMap>(storedColumnWidths ?? {});
+    const [containerHeight, setContainerHeight] = useState<number>(500);
     const columns = useCallsColumns();
     const [callRequest, { shouldSkip, notReady }] = useCallsFetchArg();
 
     useLayoutEffect(() => {
-        if (callRequest.view?.page === 1) {
-            const tableBody = containerRef.current?.querySelector('.ux-table-body');
-            if (tableBody) {
-                tableBody.scrollTo({
-                    top: 0,
-                    behavior: 'smooth',
-                });
-            }
+        if (callRequest.view?.page === 1 && tableBodyRef.current) {
+            tableBodyRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
         }
     }, [callRequest.view?.page]);
+
+    useLayoutEffect(() => {
+        if (!containerRef.current) {
+            return;
+        }
+
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const height = entry.contentRect.height;
+                setContainerHeight(height);
+            }
+        });
+
+        resizeObserver.observe(containerRef.current);
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, []);
+
     const { isFetching, data, isError, error, refetch } = useGetCallsByConditionQuery(callRequest, {
         skip: shouldSkip,
     });
 
     const tableScroll: TableProps<CallInfo>['scroll'] = useMemo(() => {
-        if (containerRef.current?.clientHeight) {
+        if (containerHeight) {
             return {
                 x: 'max-content',
-                y: containerRef.current?.clientHeight - 45,
+                y: containerHeight - 45,
             };
         }
         return {
             x: 'max-content',
             y: 500,
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [containerRef.current?.clientHeight]);
+    }, [containerHeight]);
 
     const handleResize = useCallback((columnKey: Key) => {
         return (_: unknown, data: ResizeCallbackData) => {
@@ -102,6 +120,24 @@ const CallsTable: FC = memo(() => {
         },
         [dispatch]
     );
+
+    const handleBottomReached = useCallback(
+        (event: React.UIEvent<HTMLDivElement>) => {
+            const target = event.currentTarget;
+            const maxScroll = target.scrollHeight - target.clientHeight;
+            const currentScroll = target.scrollTop;
+            if (currentScroll === maxScroll) {
+                if (!isFetching) {
+                    const rows = data?.status?.filteredRecords || 0;
+                    const pages = Math.ceil(rows / 100);
+                    dispatch(contextDataAction.setMaxPage( pages ));
+                    dispatch(contextDataAction.nextCallsPage());
+                }
+            }
+        },
+        [dispatch, isFetching, data]
+    );
+
     const tableComponents = useMemo(() => {
         return {
             header: {
@@ -109,8 +145,11 @@ const CallsTable: FC = memo(() => {
                     return <ResizableTitle {...props} />;
                 },
             },
+            body: {
+                wrapper: (props: any) => <div ref={tableBodyRef} onScroll={handleBottomReached} {...props} />,
+            },
         } as TableProps<CallInfo>['components'];
-    }, []);
+    }, [handleBottomReached]);
 
     const resizableColumns = useMemo(() => {
         return columns?.map(col => {
@@ -132,36 +171,6 @@ const CallsTable: FC = memo(() => {
         });
     }, [columnWidths, columns, handleResize, handleResizeStop]);
 
-    const handleBottomReached = useCallback(
-        (event: Event) => {
-            const target = event.target as HTMLElement;
-            const maxScroll = target.scrollHeight - target.clientHeight;
-            const currentScroll = target.scrollTop;
-            if (currentScroll === maxScroll) {
-                if (!isFetching) {
-                    // console.log(data?.status)
-                    const rows = data?.status?.filteredRecords || 0;
-                    // console.log(rows);
-                    const pages = Math.ceil(rows / 100);
-                    // console.log(pages);
-                    dispatch(contextDataAction.setMaxPage( pages ));
-                    dispatch(contextDataAction.nextCallsPage());
-                }
-            }
-        },
-        [dispatch, isFetching]
-    );
-    useLayoutEffect(() => {
-        const tableContent = document.querySelector('.dynamicTable .ux-table-body');
-        if (tableContent) {
-            tableContent.addEventListener('scroll', handleBottomReached);
-        }
-
-        return () => {
-            tableContent?.removeEventListener('scroll', handleBottomReached);
-        };
-    }, [handleBottomReached]);
-
     const handleTableChange = useCallback(
         (
             pagination: TablePaginationConfig,
@@ -169,7 +178,6 @@ const CallsTable: FC = memo(() => {
             sorter: SorterResult<CallInfo> | Array<SorterResult<CallInfo>>,
             extra: TableCurrentDataSource<CallInfo>
         ) => {
-            // console.log('pagination, filters, sorter, extra :>> ', { pagination, filters, sorter, extra });
             if (extra.action === 'sort' && !Array.isArray(sorter)) {
                 dispatch(
                     contextDataAction.updateCallsTableState({

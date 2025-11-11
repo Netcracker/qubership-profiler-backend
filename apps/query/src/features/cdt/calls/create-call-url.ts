@@ -11,7 +11,6 @@ export function createExportUrl(callRequest: CallsLoadRequest): string {
     const hashParams = new URLSearchParams(params).toString();
     // const url = `/cdt/v2/calls/export/csv?${hashParams}`;
     const url = `/cdt/v2/calls/export/excel?${hashParams}`;
-    // console.log(url)
     return url;
 }
 

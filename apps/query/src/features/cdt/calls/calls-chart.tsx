@@ -6,33 +6,41 @@ import classNames from "@app/features/cdt/calls/calls-chart.module.scss";
 import { unix } from 'moment';
 import {userLocale} from "@app/common/user-locale";
 
+// Type definition for chart data point: [timestamp, duration, calls]
+type ChartDataPoint = [timestamp: number, duration: number, calls: number];
+
+interface EChartsFormatterParam {
+    data: ChartDataPoint;
+    dataIndex: number;
+    seriesName: string;
+    value: ChartDataPoint;
+}
+
 const CallsChart = () => {
     const [callRequest, {shouldSkip, notReady}] = useCallsFetchArg();
     const {isFetching, data, isError, error, refetch} = useGetCallsStatisticsByConditionQuery(callRequest, {
         skip: shouldSkip,
     });
 
-    if (data) {
-        console.log("data")
-        console.log(data)
-    }
-
     const graphCollapsed = useCallsStoreSelector(s => s.graphCollapsed);
 
-    const dataset: (any)[][] = [];
+    const dataset: ChartDataPoint[] = [];
 
     let min_calls = Number.MAX_SAFE_INTEGER;
     let max_calls = 0
 
     if (data?.calls) {
         data?.calls.forEach(elem => {
-            dataset.push([elem.ts, elem.duration, elem.calls])
-            if (elem.calls && elem.calls > max_calls) {
-                max_calls = elem.calls
+            // Only push data points with all required values
+            if (elem.ts != null && elem.duration != null && elem.calls != null) {
+                dataset.push([elem.ts, elem.duration, elem.calls]);
+                if (elem.calls > max_calls) {
+                    max_calls = elem.calls;
+                }
+                if (elem.calls < min_calls) {
+                    min_calls = elem.calls;
+                }
             }
-            if (elem.calls && elem.calls < min_calls) {
-              min_calls = elem.calls
-          }
         });
     }
 
@@ -70,14 +78,14 @@ const CallsChart = () => {
           {
             data: dataset,
             type: 'scatter',
-            symbolSize: function (data: any) {
+            symbolSize: function (data: ChartDataPoint) {
               return 4*Math.log10((data[2] - min_calls) / (max_calls - min_calls) * 30 + 10);
             },
             emphasis: {
               focus: 'series',
               label: {
                 show: true,
-                formatter: function (param: any) {
+                formatter: function (param: EChartsFormatterParam) {
                   return param.data[2];
                 },
                 position: 'top'
@@ -90,8 +98,7 @@ const CallsChart = () => {
               color: 'rgba(145,198,245,0.5)'
             },
             tooltip: {
-              formatter: (param: any) => {
-                  // const ts = unix(param.data[0]);
+              formatter: (param: EChartsFormatterParam) => {
                   const ts = unix(param.data[0]/1000).toDate().toLocaleString(userLocale, {hour12: false });
                   return [
                       '<b>' + ts + '</b> <br/>',

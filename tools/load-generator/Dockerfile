@@ -31,4 +31,7 @@ RUN chmod +x /xk6/scripts/start.sh
 
 EXPOSE      80
 EXPOSE      8080
+
+USER 10001
+
 ENTRYPOINT  [ "/xk6/scripts/start.sh" ]

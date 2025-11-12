@@ -1,4 +1,4 @@
-FROM golang:1.24.5-alpine3.22 as builder
+FROM golang:1.25-alpine AS builder
 
 ENV TOOLS_VERSION="9.3.3.2.2" \
     INSTALLER_CLOUD="https://github.com/pd.saas.mvn/com/netcracker/execution-statistics-collector/installer-cloud" \

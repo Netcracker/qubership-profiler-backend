@@ -1,0 +1,154 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: profiler-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cdt_test
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d cdt_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - profiler-network
+
+  minio:
+    image: minio/minio:latest
+    container_name: profiler-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: test
+      MINIO_ROOT_PASSWORD: test12345
+    ports:
+      - "9000:9000"  # MinIO API
+      - "9001:9001"  # MinIO Console
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - profiler-network
+
+  # Automatically create bucket when MinIO is ready
+  minio-init:
+    image: minio/mc:latest
+    container_name: profiler-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set minio http://minio:9000 test test12345;
+      mc mb minio/profiler --ignore-existing;
+      mc anonymous set download minio/profiler;
+      echo 'MinIO bucket created successfully';
+      "
+    networks:
+      - profiler-network
+    restart: "no"  # Run once and exit
+
+  # Optional: Collector application (use with 'docker-compose --profile app up')
+  collector:
+    profiles: ["app"]
+    build:
+      context: ./apps/collector
+      dockerfile: Dockerfile
+    container_name: profiler-collector
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: cdt_test
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: test
+      MINIO_SECRET_KEY: test12345
+      MINIO_BUCKET_NAME: profiler
+      QUARKUS_PROFILE: docker-local
+    ports:
+      - "8080:8080"  # Application port
+      - "5005:5005"  # Debug port (optional)
+      - "1715:1715"  # collector port
+      - "1710:1710"  # collector port
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    volumes:
+      - ./apps/collector/output:/app/output
+    networks:
+      - profiler-network
+
+  # Optional: Compactor application (use with 'docker-compose --profile app up')
+  # Note: context is root because Dockerfile needs access to shared libs/
+  compactor:
+    profiles: ["app"]
+    build:
+      context: .
+      dockerfile: apps/compactor/Dockerfile
+    container_name: profiler-compactor
+    command: ["run", "--run.cron"]
+    environment:
+      POSTGRES_URL: postgres:5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cdt_test
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY_ID: test
+      MINIO_SECRET_ACCESS_KEY: test12345
+      MINIO_BUCKET: profiler
+    ports:
+      - "6060:6060"  # Metrics port
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    networks:
+      - profiler-network
+
+  # Health check visualizer (optional, for monitoring)
+  healthcheck:
+    profiles: ["monitor"]
+    image: alpine:latest
+    container_name: profiler-healthcheck
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    command: >
+      sh -c "echo 'All services are healthy!' &&
+             echo 'PostgreSQL: Ready at postgres:5432' &&
+             echo 'MinIO: Ready at http://minio:9000' &&
+             echo 'MinIO Console: http://localhost:9001' &&
+             echo 'Credentials - MinIO: test/test12345, PostgreSQL: postgres/postgres'"
+    networks:
+      - profiler-network
+    restart: "no"
+
+networks:
+  profiler-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  minio_data:
+    driver: local

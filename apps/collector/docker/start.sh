@@ -29,7 +29,7 @@ EOF
 }
 
 launch_reaugmentation() {
-  local CMD="/usr/bin/java $(java_options) -Dquarkus.launch.rebuild=true -jar /app/quarkus-run.jar"
+  local CMD="java $(java_options) -Dquarkus.launch.rebuild=true -jar /app/quarkus-run.jar"
 
   echo "$CMD"
   $CMD
@@ -37,7 +37,7 @@ launch_reaugmentation() {
 }
 
 launch_main_process() {
-  local CMD="/usr/bin/java $(java_options) $(java_debug) -jar /app/quarkus-run.jar"
+  local CMD="java $(java_options) $(java_debug) -jar /app/quarkus-run.jar"
 
   echo "$CMD"
   $CMD

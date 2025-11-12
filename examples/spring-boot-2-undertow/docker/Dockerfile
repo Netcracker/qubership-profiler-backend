@@ -1,5 +1,5 @@
-ARG IMAGE
-FROM ${IMAGE:-centos7/openjdk11-x86:11.0.23.01}
+ARG IMAGE=alpine/openjdk17:17.0.7.7.05
+FROM ${IMAGE}
 
 COPY target/*.jar /app/app-example-1.0.0.jar
 

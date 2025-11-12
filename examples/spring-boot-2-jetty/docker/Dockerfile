@@ -1,5 +1,5 @@
-ARG IMAGE
-FROM ${IMAGE:-alpine/openjdk21:21.0.3.9.04}
+ARG IMAGE=alpine/openjdk21:21.0.3.9.04
+FROM ${IMAGE}
 
 COPY target/*.jar /app/app-example-1.0.0.jar
 

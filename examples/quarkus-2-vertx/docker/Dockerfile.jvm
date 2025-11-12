@@ -1,5 +1,5 @@
-ARG IMAGE
-FROM ${IMAGE:-centos7/openjdk11-x86:11.0.23.01}
+ARG IMAGE=centos7/openjdk11-x86:11.0.23.01
+FROM ${IMAGE}
 
 COPY target/quarkus-app/lib/ /app/deployments/lib/
 COPY target/quarkus-app/*.jar /app/deployments/

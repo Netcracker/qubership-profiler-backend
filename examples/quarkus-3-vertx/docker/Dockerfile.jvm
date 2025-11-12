@@ -1,5 +1,5 @@
-ARG IMAGE
-FROM ${IMAGE:-alpine/openjdk17:17.0.11.9.04}
+ARG IMAGE=alpine/openjdk17:17.0.11.9.04
+FROM ${IMAGE}
 
 COPY target/quarkus-app/lib/ /app/deployments/lib/
 COPY target/quarkus-app/*.jar /app/deployments/

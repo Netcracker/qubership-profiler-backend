@@ -6,9 +6,9 @@
 # Variables
 # Set SKIP_FRONTEND=Y to exclude the query (frontend) app from builds
 ifeq ($(SKIP_FRONTEND),Y)
-APPS := collector dumps-collector maintenance
+APPS := collector compactor dumps-collector maintenance
 else
-APPS := collector dumps-collector maintenance query
+APPS := collector compactor dumps-collector maintenance query
 endif
 
 # Default target
@@ -82,6 +82,10 @@ collector-build:
 	@echo "==> Building collector..."
 	$(MAKE) -C collector build
 
+compactor-build:
+	@echo "==> Building compactor..."
+	$(MAKE) -C compactor build
+
 dumps-collector-build:
 	@echo "==> Building dumps-collector..."
 	$(MAKE) -C dumps-collector build
@@ -97,6 +101,10 @@ query-build:
 collector-clean:
 	@echo "==> Cleaning collector..."
 	$(MAKE) -C collector clean
+
+compactor-clean:
+	@echo "==> Cleaning compactor..."
+	$(MAKE) -C compactor clean
 
 dumps-collector-clean:
 	@echo "==> Cleaning dumps-collector..."
@@ -114,6 +122,10 @@ collector-test:
 	@echo "==> Testing collector..."
 	$(MAKE) -C collector test
 
+compactor-test:
+	@echo "==> Testing compactor..."
+	$(MAKE) -C compactor test
+
 dumps-collector-test:
 	@echo "==> Testing dumps-collector..."
 	$(MAKE) -C dumps-collector test
@@ -129,6 +141,10 @@ query-test:
 collector-docker:
 	@echo "==> Building Docker image for collector..."
 	$(MAKE) -C collector docker-build
+
+compactor-docker:
+	@echo "==> Building Docker image for compactor..."
+	$(MAKE) -C compactor docker-build
 
 dumps-collector-docker:
 	@echo "==> Building Docker image for dumps-collector..."
@@ -146,6 +162,10 @@ collector-archive:
 	@echo "==> Creating archive for collector..."
 	$(MAKE) -C collector archive
 
+compactor-archive:
+	@echo "==> Creating archive for compactor..."
+	$(MAKE) -C compactor archive
+
 dumps-collector-archive:
 	@echo "==> Creating archive for dumps-collector..."
 	$(MAKE) -C dumps-collector archive
@@ -162,6 +182,10 @@ query-archive:
 help-collector:
 	@echo "Help for collector application:"
 	$(MAKE) -C collector help
+
+help-compactor:
+	@echo "Help for compactor application:"
+	$(MAKE) -C compactor help
 
 help-dumps-collector:
 	@echo "Help for dumps-collector application:"

@@ -1,0 +1,103 @@
+0
+---
+0
+---
+CREATE KEYSPACE IF NOT EXISTS cdt WITH replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 } AND durable_writes = true;
+---
+1
+---
+274
+---
+select pod_name, service_name, namespace, pod_info, rc_info, dc_info from pod_details
+---
+2
+---
+445
+---
+select * from active_pods where active_during_hour = ?
+---
+3
+---
+554
+---
+select rolling_sequence_id, create_when, modified_when from stream_registry where modified_when >= ? and create_when <= ? and pod_name = ? and stream_name = ? allow filtering
+---
+4
+---
+904
+---
+SELECT * FROM pod_details WHERE pod_name=? LIMIT 1
+---
+5
+---
+1005
+---
+select position, tag from stream_dictionary where pod_name = ? allow filtering
+---
+6
+---
+1162
+---
+select param_name, param_index, param_list, param_order, signature from stream_params where pod_name = ? allow filtering
+---
+7
+---
+1403
+---
+select * from stream_chunks where pod_name = ? and stream_name = ? and rolling_sequence_id = ?
+---
+8
+---
+1592
+---
+select pod_name, time, suspend_time from stream_suspend where pod_name = ? and time > ? and time < ? allow filtering
+---
+9
+---
+1825
+---
+select * from pod_statistics where pod_name = ? and stream_name = ? and cur_date >= ? and cur_date <= ?
+---
+10
+---
+2032
+---
+select * from pod_details where pod_name = ?
+---
+11
+---
+2121
+---
+select pod_name, data_accumulated from stream_registry where pod_name = ? allow filtering
+---
+12
+---
+2300
+---
+select pod_name from pod_active_time where pod_name = ? and last_active > ? allow filtering
+---
+13
+---
+2483
+---
+select position, tag from stream_dictionary where pod_name = ? and position in ? allow filtering
+---
+14
+---
+2676
+---
+select pod_name from pod_details where pod_name = ? and service_name = ? and namespace = ? allow filtering
+---
+15
+---
+2889
+---
+select * from stream_registry where pod_name = ? and stream_name = ? and rolling_sequence_id = ?
+---
+16
+---
+3082
+---
+select pod_name from pod_details where pod_name = ? and namespace = ? allow filtering
+---
+EOF

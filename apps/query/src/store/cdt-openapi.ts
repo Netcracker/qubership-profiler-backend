@@ -1,6 +1,6 @@
 import { openApi as api } from './openapi-query';
 import type { DashboardEntity } from './slices/calls-tree-context-slices';
-import { downloadFile } from '@app/utils/download-file';
+import { saveAs } from 'file-saver';
 
 const serializeCallsLoadRequest = (request: CallsLoadRequest): string => {
     const { filters, parameters, view } = request;
@@ -145,9 +145,8 @@ export const cdtOpenapi = api.injectEndpoints({
                 url: `/cdt/v2/calls/tree/download`, method: 'POST', body: queryArg,
                 responseHandler: async response => {
                     if (response.ok) {
-                        const blob = await response.blob()
-                        const url = window.URL.createObjectURL(blob);
-                        downloadFile(url, "calls-tree.html")
+                        const blob = await response.blob();
+                        saveAs(blob, "calls-tree.html");
                     }
                 }
             })

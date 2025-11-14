@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import classNames from '../content-controls.module.scss';
 import ColumnsPopover from './columns-popover';
 import { useDisableWidgetFunction } from '../../hooks/use-widgets';
-import { useDebounceCallback } from '@app/hooks/use-debounce-callback';
+import { useDebounceCallback } from '@react-hook/debounce';
 
 const CallsTreeTableSearch: FC = () => {
     const [urlParams, setUrlParams] = useSearchParams();

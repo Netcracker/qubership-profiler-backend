@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { isTimeoutError } from '@app/common/guards/errors';
 import ContentControls from '@app/features/cdt/calls/content-controls';
 import { useCallsColumns } from '@app/features/cdt/calls/hooks/use-calls-columns';

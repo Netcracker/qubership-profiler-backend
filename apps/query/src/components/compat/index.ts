@@ -6,10 +6,10 @@ export { ContextBar, type ContextItemModel } from './context-bar';
 export { IsoDatePicker } from './iso-date-picker';
 export { PropertiesList, reorderItems, type PropertiesItemModel } from './properties-list';
 export { confirmApiFactory } from './confirm';
+export { HighlightText, highlight } from './highlight-text';
 export {
     downloadFile,
     uxNotificationHelper,
-    highlight,
     createStoreContext,
     usePopupVisibleState,
 } from './utils';

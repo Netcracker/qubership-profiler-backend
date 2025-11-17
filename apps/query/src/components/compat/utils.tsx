@@ -27,21 +27,6 @@ export const uxNotificationHelper = {
     },
 };
 
-export const highlight = (text: string, search: string): React.ReactNode => {
-    if (!search) return text;
-
-    const parts = text.split(new RegExp(`(${search})`, 'gi'));
-    return parts.map((part, index) =>
-        part.toLowerCase() === search.toLowerCase() ? (
-            <mark key={index} className="mark-text">
-                {part}
-            </mark>
-        ) : (
-            part
-        )
-    );
-};
-
 export const createStoreContext = <T extends Record<string, any>>(defaultValue: T) => {
     const StateContext = React.createContext<T>(defaultValue);
     const SetStateContext = React.createContext<React.Dispatch<React.SetStateAction<T>>>(() => {});

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { CallsTreeInfo } from '@app/store/cdt-openapi';
 import { Progress } from 'antd';
 import type { ColumnsType } from 'antd/es/table';

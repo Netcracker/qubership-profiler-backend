@@ -1,7 +1,6 @@
-import { usePopupVisibleState } from '@netcracker/cse-ui-components';
-import { ReactComponent as TraceIconSvg } from '@netcracker/ux-assets/icons/document/document-outline-16.svg';
-import { UxButton, UxIcon, UxPopupNew } from '@netcracker/ux-react';
-import { UxTextArea } from '@netcracker/ux-react/inputs/input/textarea/textarea.component';
+import { usePopupVisibleState } from '@app/components/compat';
+import { FileTextOutlined } from '@ant-design/icons';
+import { Button, Modal, Input } from 'antd';
 import { type FC } from 'react';
 import classNames from '../../content-controls.module.scss';
 
@@ -10,24 +9,23 @@ interface TraceButtonModel {
 }
 
 const TraceButton: FC<TraceButtonModel> = ({ text }) => {
-    const [visible, close, open] = usePopupVisibleState();
+    const { visible, close, open } = usePopupVisibleState();
 
     return (
         <div className={classNames.toolControls}>
-            <UxButton type="light" onClick={open}>
-                {<UxIcon style={{ fontSize: 16, color: '#0068FF' }} component={TraceIconSvg} />}
-            </UxButton>
-            <UxPopupNew
-                visible={visible}
-                header="StackTrace"
-                size="large"
-                footer={<UxButton onClick={close}>Close</UxButton>}
-                // TODO: replace value with real text
-                content={<UxTextArea placeholder="Placeholder" readOnly={true} autoSize value={text} />}
+            <Button type="text" onClick={open}>
+                <FileTextOutlined style={{ fontSize: 16, color: '#0068FF' }} />
+            </Button>
+            <Modal
+                open={visible}
+                title="StackTrace"
+                width={800}
+                footer={<Button onClick={close}>Close</Button>}
                 onOk={close}
                 onCancel={close}
-                onClose={close}
-            />
+            >
+                <Input.TextArea placeholder="Placeholder" readOnly={true} autoSize value={text} />
+            </Modal>
         </div>
     );
 };

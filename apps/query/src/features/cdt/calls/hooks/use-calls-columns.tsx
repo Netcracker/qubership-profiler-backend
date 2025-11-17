@@ -2,7 +2,7 @@ import type { RequiredBy } from '@app/common/type-utils';
 import HtmlEllipsis from '@app/components/html-ellipsis/html-ellipsis';
 import { useCallsStoreSelector } from '@app/features/cdt/calls/calls-store';
 import type { CallInfo } from '@app/store/cdt-openapi';
-import { UxLink } from '@netcracker/ux-react/typography/link/link.component';
+import { Typography } from 'antd';
 import type { ColumnType } from 'antd/lib/table/interface';
 import prettyBytes from 'pretty-bytes';
 import prettyMilliseconds from 'pretty-ms';
@@ -44,9 +44,9 @@ export const DEFAULT_CALLS_COLUMNS: RequiredBy<ColumnType<CallInfo>, 'key'>[] = 
         width: 80,
         render: (duration: CallInfo['duration'], row) =>
             duration ? (
-                <UxLink href={createCallUrl(row)} target="_blank">
+                <Typography.Link href={createCallUrl(row)} target="_blank">
                     <HighlightCell highlight={duration > 10_000}>{prettyMilliseconds(duration)}</HighlightCell>
-                </UxLink>
+                </Typography.Link>
             ) : (
                 '0ms'
             ),

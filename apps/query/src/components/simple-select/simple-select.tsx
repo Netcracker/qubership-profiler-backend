@@ -1,24 +1,21 @@
-import { type UxInputWrapper } from '@netcracker/cse-ui-components/utils/ux-input-wrapper';
-import { UxSelect } from '@netcracker/ux-react/inputs/select';
-import type { UxSelectProps, UxSelectValue } from '@netcracker/ux-react/inputs/select/select.model';
+import { Select, type SelectProps } from 'antd';
 import { type Key, memo, useCallback, useMemo } from 'react';
 
 export type SimpleSelectValueChange = string | number | boolean | Key[];
 
-export interface SimpleSelectProps extends Omit<UxSelectProps, 'value' | 'onChange'> {
+export interface SimpleSelectProps extends Omit<SelectProps, 'value' | 'onChange'> {
     value?: string | Key[];
 
     onChange?: (v?: SimpleSelectValueChange) => void;
 }
-const SimpleSelect: UxInputWrapper<SimpleSelectProps> = memo(({ value, onChange, options, ...selectProps }) => {
+const SimpleSelect = memo<SimpleSelectProps>(({ value, onChange, options, ...selectProps }) => {
     const selectValue = useMemo(() => {
-        const foundOption = options?.find(it => {
-            const option = it as UxSelectValue;
-            return option.value === value;
-        }) as UxSelectValue;
+        const foundOption = options?.find((it: any) => {
+            return it.value === value;
+        });
         if (!foundOption && !Array.isArray(value)) {
             if (value) {
-                return { value: value, label: value } as UxSelectValue;
+                return { value: value, label: value };
             }
         }
         if (!foundOption && Array.isArray(value)) {
@@ -31,7 +28,7 @@ const SimpleSelect: UxInputWrapper<SimpleSelectProps> = memo(({ value, onChange,
     const handleChange = useCallback(
         (opt: any) => {
             if (Array.isArray(opt)) {
-                onChange?.(opt.map(it => it.value));
+                onChange?.(opt.map((it: any) => it.value));
             } else {
                 onChange?.(opt?.value);
             }
@@ -39,10 +36,9 @@ const SimpleSelect: UxInputWrapper<SimpleSelectProps> = memo(({ value, onChange,
         [onChange]
     );
 
-    return <UxSelect value={selectValue} onChange={handleChange} options={options} {...selectProps}></UxSelect>;
-}) as UxInputWrapper<SimpleSelectProps>;
+    return <Select value={selectValue} onChange={handleChange} options={options} {...selectProps}></Select>;
+});
 
 SimpleSelect.displayName = 'SimpleSelect';
-SimpleSelect.__UX_INPUT = true;
 
 export default SimpleSelect;

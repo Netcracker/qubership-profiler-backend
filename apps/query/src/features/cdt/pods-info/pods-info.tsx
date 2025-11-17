@@ -1,8 +1,8 @@
 import PodsTable from '@app/features/cdt/pods-info/pods-table';
 import { useAppDispatch } from '@app/store/hooks';
 import { contextDataAction } from '@app/store/slices/context-slices';
-import { ContentCard } from '@netcracker/cse-ui-components';
-import { UxInput } from '@netcracker/ux-react';
+import { ContentCard } from '@app/components/compat';
+import { Input } from 'antd';
 import { ESC_QUERY_PARAMS } from '@app/constants/query-params';
 import {useSearchParams} from "react-router-dom";
 
@@ -30,11 +30,10 @@ const PodsInfoContainer = () => {
             title="Pods Info"
             titleClassName="ux-typography-18px-medium"
             extra={
-                <UxInput.Search
+                <Input.Search
                     value={podsQuery}
                     placeholder="Search"
                     size="small"
-                    outlined
                     onChange={e => {
                         onChangeSearch(e);
                         dispatch(contextDataAction.toFirstPage());

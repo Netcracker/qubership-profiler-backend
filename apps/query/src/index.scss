@@ -1,16 +1,11 @@
-@use '@netcracker/ux-react/assets/styles/scss/scroll';
-@use '@netcracker/ux-react/assets/styles/scss/typography';
 @use './assets/styles/fonts.scss';
 @use '@assets/styles/containers/app.scss';
 @use '@assets/styles/containers/flex-containers.scss';
 
-@import 'antd/es/date-picker/style/index.css';
+@import 'antd/dist/reset.css';
+@import '@assets/styles/colors.scss';
 
-@import '@netcracker/ux-react/index.css';
-@import '@netcracker/ux-react/assets/styles/scss/colors';
-@import '@netcracker/ux-react/assets/styles/scss/typography.mixins';
-
-// Dashboard grid layout ->
+// Dashboard grid layout
 @import 'react-grid-layout/css/styles.css';
 @import 'react-resizable/css/styles.css';
 
@@ -22,18 +17,30 @@
     padding: 0;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 ::-webkit-scrollbar-corner {
     background-color: transparent;
 }
 
-// ux scroll styles
-@include scroll.ux-react-scroll-default();
-
 body {
-    --ux-react-form-item-plus-item-margin-top: 0;
-    // Main font size for all text
-    @include ux-typography-base();
-    @include ux-typography-13px-regular();
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+        'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    font-size: 14px;
+    line-height: 1.5715;
 
     height: 100vh;
     background-color: #f8f9fa;
@@ -42,7 +49,6 @@ body {
 }
 
 .amarant-label {
-    --ux-react-dropdown-new-item-icon-color: #{$amarant};
     color: $amarant;
 }
 
@@ -63,36 +69,12 @@ body {
     background-color: $sand;
 }
 
-.ux-select-long-value {
-    --ux-react-label-pointer-events: auto;
-
-    .ux-select {
-        &__label,
-        &__placeholder,
-        &__option,
-        &__single-value {
-            z-index: 10;
-            --ux-react-ellipsis-white-space: normal;
-        }
+// Ant Design Select customizations
+.ant-select-long-value {
+    .ant-select-selector {
+        white-space: normal;
+        height: auto;
     }
-}
-
-.ux-link {
-    color: var(--ux-react-link-color, $denim);
-    &:active,
-    :focus,
-    :hover,
-    :visited {
-        color: var(--ux-react-link-color, $denim);
-    }
-    &:hover {
-        color: var(--ux-react-link-color, $denim);
-        text-decoration: underline;
-    }
-}
-
-.ux-date-picker-suffix {
-    justify-content: flex-end;
 }
 
 .table-container {
@@ -106,8 +88,8 @@ body {
         width: 100%;
     }
 
-    > .ux-table-new {
-        .ux-table-new__cell {
+    > .ant-table-wrapper {
+        .ant-table-cell {
             word-break: keep-all;
         }
         overflow: auto;
@@ -116,8 +98,8 @@ body {
 
 .card-with-table {
     overflow: hidden;
-    .ux-react-table-new {
-        .ux-react-table-new__cell {
+    .ant-table-wrapper {
+        .ant-table-cell {
             word-break: keep-all;
         }
         overflow: auto;
@@ -125,16 +107,8 @@ body {
 }
 
 .dashed-info-page {
-    border: 1px dashed var(--grey-london-fog, #d5dce3);
+    border: 1px dashed #d5dce3;
     border-radius: 20px;
-    --ui-info-page-icon-padding-bottom: 0px;
-}
-
-// hot fix. Get rid of it in future
-.ux-table-with-native-expand {
-    .ux-table-cell-with-append :first-child {
-        transform: translate(0, 1px);
-    }
 }
 
 .react-grid-item.react-grid-placeholder {

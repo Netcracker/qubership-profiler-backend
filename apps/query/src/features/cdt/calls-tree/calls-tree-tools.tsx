@@ -1,25 +1,20 @@
 import { useDownloadCallsTreeDataMutation } from '@app/store/cdt-openapi';
 import { useAppSelector } from '@app/store/hooks';
 import { selectDashboardState } from '@app/store/slices/calls-tree-context-slices';
-import { UxButton, UxDropdownNew, UxIcon, type UxDropdownNewItem } from '@netcracker/ux-react';
+import { Button, Dropdown, Menu } from 'antd';
+import { LoginOutlined, DownloadOutlined, PlusCircleOutlined, BarChartOutlined, UnorderedListOutlined, BranchesOutlined } from '@ant-design/icons';
 import { useCallback } from 'react';
-import { ReactComponent as EntranceArrowLeftIcon } from '@netcracker/ux-assets/icons/entrance-arrow-left/entrance-arrow-left-20.svg';
-import { ReactComponent as DownloadIcon } from '@netcracker/ux-assets/icons/download/download-20.svg';
-import { ReactComponent as AddCircleIcon } from '@netcracker/ux-assets/icons/add-circle/add-circle-outline-20.svg';
-import { ReactComponent as GraphStatisticsIcon } from '@netcracker/ux-assets/icons/graph-statistics/graph-statistics-20.svg';
-import { ReactComponent as ListBulletedIcon } from '@netcracker/ux-assets/icons/list-bulleted/list-bulleted-20.svg';
-import { ReactComponent as FlowCascadeIcon } from '@netcracker/ux-assets/icons/flow-cascade/flow-cascade-20.svg';
 import { useEnableWidgetFunction } from './hooks/use-widgets';
 
 export const CallsTreeBackToOverviewButton = () => {
     return (
-        <UxButton
-            type="light"
-            leftIcon={<UxIcon component={EntranceArrowLeftIcon} />}
+        <Button
+            type="text"
+            icon={<LoginOutlined />}
             onClick={() => console.log('Back to overview clicked')}
         >
             Back to Overview
-        </UxButton>
+        </Button>
     );
 };
 
@@ -30,14 +25,14 @@ export const CallsTreeDownloadButton = () => {
         downloadCallsTreeData({ initialPanelState: panels });
     }, [panels, downloadCallsTreeData]);
 
-    return <UxButton type="light" leftIcon={<UxIcon component={DownloadIcon} />} onClick={downloadCallsTree} />;
+    return <Button type="text" icon={<DownloadOutlined />} onClick={downloadCallsTree} />;
 };
 
 export const CallsTreeAddWidgetDropdown = () => {
     const enableWidget = useEnableWidgetFunction();
 
-    function handleClick(item: UxDropdownNewItem) {
-        switch (item.id) {
+    function handleClick({ key }: any) {
+        switch (key) {
             case 'frame-graph':
                 enableWidget('frame-graph', { w: 12, h: 1 });
                 break;
@@ -49,30 +44,24 @@ export const CallsTreeAddWidgetDropdown = () => {
                 break;
         }
     }
-    
+
+    const menu = (
+        <Menu onClick={handleClick}>
+            <Menu.Item key="frame-graph" icon={<BarChartOutlined />}>
+                Frame Graph
+            </Menu.Item>
+            <Menu.Item key="statistics" icon={<UnorderedListOutlined />}>
+                Statistics
+            </Menu.Item>
+            <Menu.Item key="call-tree" icon={<BranchesOutlined />}>
+                Call Tree
+            </Menu.Item>
+        </Menu>
+    );
+
     return (
-        <UxDropdownNew
-            trigger="hover"
-            items={[
-                {
-                    id: 'frame-graph',
-                    text: 'Frame Graph',
-                    leftIcon: <UxIcon component={GraphStatisticsIcon} />,
-                },
-                {
-                    id: 'statistics',
-                    text: 'Statistics',
-                    leftIcon: <UxIcon component={ListBulletedIcon} />,
-                },
-                {
-                    id: 'call-tree',
-                    text: 'Call Tree',
-                    leftIcon: <UxIcon component={FlowCascadeIcon} />,
-                },
-            ]}
-            onItemClick={handleClick}
-        >
-            <UxButton type="light" leftIcon={<UxIcon component={AddCircleIcon} />} />{' '}
-        </UxDropdownNew>
+        <Dropdown overlay={menu} trigger={['hover']}>
+            <Button type="text" icon={<PlusCircleOutlined />} />
+        </Dropdown>
     );
 };

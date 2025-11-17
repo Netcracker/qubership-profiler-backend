@@ -1,4 +1,4 @@
-import { UxHeader } from '@netcracker/ux-react/header';
+import { Layout } from 'antd';
 import { type FC, memo } from 'react';
 
 export interface AppHeaderProps {
@@ -8,13 +8,9 @@ export interface AppHeaderProps {
 const appTitle = `Cloud Diagnostic Toolset`;
 const AppHeader: FC<AppHeaderProps> = ({version}) => {
     return (
-        <UxHeader>
-            <UxHeader.Row>
-                <UxHeader.Logo />
-                <UxHeader.Title text={version ? `${appTitle} v.${version}` : appTitle} />
-                <UxHeader.Group></UxHeader.Group>
-            </UxHeader.Row>
-        </UxHeader>
+        <Layout.Header>
+            <div>{version ? `${appTitle} v.${version}` : appTitle}</div>
+        </Layout.Header>
     );
 };
 

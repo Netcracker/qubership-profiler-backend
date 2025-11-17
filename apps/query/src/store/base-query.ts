@@ -2,7 +2,7 @@ import { extractErrorMessageFromBeError } from '@app/common/errors/error-utils';
 import { isInvalidTokenError } from '@app/common/guards/errors';
 import { userLocale } from '@app/common/user-locale';
 import { API_BASE_URL } from '@app/constants/app.constants';
-import { uxNotificationHelper } from '@netcracker/ux-react';
+import { notification } from 'antd';
 import {
     type BaseQueryFn,
     type FetchArgs,
@@ -75,8 +75,8 @@ export const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBa
     const baseApiResult = await baseQuery(args, api, extraOptions);
     if (baseApiResult.error) {
         if (isInvalidTokenError(baseApiResult.error)) {
-            uxNotificationHelper.error({
-                title: 'Invalid Token',
+            notification.error({
+                message: 'Invalid Token',
                 description: 'You need to login again.',
                 key: 'invalid_token',
             });
@@ -85,10 +85,9 @@ export const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBa
             // window.location.replace(window.location.toString());
         }
         const beErrorMessage = extractErrorMessageFromBeError(baseApiResult.error);
-        uxNotificationHelper.error({
-            title: 'API Error',
-            description: beErrorMessage?.message ?? 'Unknown Error',
-            time: new Date().toLocaleString(userLocale),
+        notification.error({
+            message: 'API Error',
+            description: `${beErrorMessage?.message ?? 'Unknown Error'} - ${new Date().toLocaleString(userLocale)}`,
             key: 'unknown_error',
         });
     }

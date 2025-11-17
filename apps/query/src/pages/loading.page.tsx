@@ -1,7 +1,7 @@
 import cn from 'clsx';
 import { type CSSProperties, type FC, memo } from 'react';
 import styles from './loading.page.module.scss';
-import { UxLoader } from '@netcracker/ux-react/loader/loader.component';
+import { Spin } from 'antd';
 
 interface LoadingPageProps {
     text?: string;
@@ -14,7 +14,7 @@ interface LoadingPageProps {
 const LoadingPage: FC<LoadingPageProps> = ({ text, className, style }) => {
     return (
         <div className={cn(styles.container, className)} style={style}>
-            <UxLoader size="large" hint={text} />
+            <Spin size="large" tip={text} />
         </div>
     );
 };

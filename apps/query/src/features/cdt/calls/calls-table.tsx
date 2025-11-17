@@ -8,9 +8,9 @@ import { type CallInfo, useGetCallsByConditionQuery } from '@app/store/cdt-opena
 import { useAppDispatch, useAppSelector } from '@app/store/hooks';
 import { contextDataAction } from '@app/store/slices/context-slices';
 import { ReactComponent as NoDataGraySvg } from '@assets/illustrations/no-data-gray.svg';
-import { InfoPage } from '@netcracker/cse-ui-components';
-import { ReactComponent as Sync20Icon } from '@netcracker/ux-assets/icons/sync/sync-20.svg';
-import { UxButton, UxIcon, UxLoader, UxTable, type UxTableProps } from '@netcracker/ux-react';
+import { InfoPage } from '@app/components/compat';
+import { SyncOutlined } from '@ant-design/icons';
+import { Button, Spin, Table, type TableProps } from 'antd';
 import type { ColumnType, TablePaginationConfig } from 'antd/lib/table';
 import type { FilterValue, SorterResult, TableCurrentDataSource, TableRowSelection } from 'antd/lib/table/interface';
 import {
@@ -40,7 +40,7 @@ function callsErrorMessage(error: unknown) {
 const tableRowKey = (r: CallInfo) => `${r.ts}-${r.duration}-${r.pod?.pod}`;
 const noDataIconStyle: CSSProperties = { fontSize: 56 };
 
-const tableIndicator = { indicator: <UxLoader size="large" /> };
+const tableIndicator = { indicator: <Spin size="large" /> };
 const CallsTable: FC = memo(() => {
     const [, set] = useCallsStore(s => s);
     const dispatch = useAppDispatch();
@@ -65,7 +65,7 @@ const CallsTable: FC = memo(() => {
         skip: shouldSkip,
     });
 
-    const tableScroll: UxTableProps['scroll'] = useMemo(() => {
+    const tableScroll: TableProps['scroll'] = useMemo(() => {
         if (containerRef.current?.clientHeight) {
             return {
                 x: 'max-content',
@@ -108,7 +108,7 @@ const CallsTable: FC = memo(() => {
                     return <ResizableTitle {...props} />;
                 },
             },
-        } as UxTableProps['components'];
+        } as TableProps['components'];
     }, []);
 
     const resizableColumns = useMemo(() => {
@@ -193,7 +193,6 @@ const CallsTable: FC = memo(() => {
         return (
             <InfoPage
                 title={<></>}
-                className="dashed-info-page"
                 message={
                     <span>
                         No Data.
@@ -201,7 +200,6 @@ const CallsTable: FC = memo(() => {
                         Select the Namespace/Service and Period
                     </span>
                 }
-                icon={<UxIcon component={NoDataGraySvg} style={noDataIconStyle} />}
             />
         );
     }
@@ -210,18 +208,16 @@ const CallsTable: FC = memo(() => {
         return (
             <InfoPage
                 title={<></>}
-                className="dashed-info-page"
                 message={
                     <span>
                         Calls Info is Unavailable. <br />
                         {message}
                     </span>
                 }
-                icon={<UxIcon component={NoDataGraySvg} style={noDataIconStyle} />}
                 additionalContent={
-                    <UxButton onClick={refetch} type="text" color="blue" leftIcon={<UxIcon component={Sync20Icon} />}>
+                    <Button onClick={refetch} type="text" icon={<SyncOutlined />}>
                         Reload
-                    </UxButton>
+                    </Button>
                 }
             />
         );
@@ -231,7 +227,7 @@ const CallsTable: FC = memo(() => {
         <div className={classNames.container}>
             <ContentControls />
             <div ref={containerRef} className="table-container">
-                <UxTable
+                <Table<CallInfo>
                     rowSelection={rowSelection}
                     className="dynamicTable"
                     dataSource={data?.calls}

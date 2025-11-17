@@ -1,5 +1,6 @@
 import type { CallsTreeInfo } from '@app/store/cdt-openapi';
-import { UxProgress, type UxTableNewColumn, type UxTableNewData } from '@netcracker/ux-react';
+import { Progress } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import TraceButton from '../call-tree-entity/calls-tree-table/trace-button/trace-button';
 import { useAppSelector } from '@app/store/hooks';
 import { selectCallsTreeState } from '@app/store/slices/calls-tree-context-slices';
@@ -7,9 +8,9 @@ import prettyMilliseconds from 'pretty-ms';
 import CallsTreeSearchedElement from '../call-tree-entity/calls-tree-table/calls-tree-searched-element';
 import ParamsButton from '../call-tree-entity/calls-tree-table/params-button/params-button';
 
-export type TableData = UxTableNewData<CallsTreeInfo>;
+export type TableData = any;
 
-export const DEFAULT_CALLS_COLUMNS: UxTableNewColumn<TableData>[] = [
+export const DEFAULT_CALLS_COLUMNS: any[] = [
     {
         name: 'Method',
         type: 'accessor',
@@ -46,11 +47,10 @@ export const DEFAULT_CALLS_COLUMNS: UxTableNewColumn<TableData>[] = [
             return originalRow.info;
         },
         cellRender: props => (
-            <UxProgress.Bar
+            <Progress
                 className="progress-bar"
                 percent={props.row.original.timePercent}
                 showInfo={true}
-                infoPosition="right"
             />
         ),
     },

@@ -4,9 +4,8 @@ import LoadingPage from '@app/pages/loading.page';
 import type { Container } from '@app/store/cdt-openapi';
 import { useAppDispatch, useAppSelector } from '@app/store/hooks';
 import { contextDataAction, selectTreeState } from '@app/store/slices/context-slices';
-import { InfoPage } from '@netcracker/cse-ui-components';
-import { UxTree } from '@netcracker/ux-react';
-import { UxSearch } from '@netcracker/ux-react/inputs/input/search/search.component';
+import { InfoPage } from '@app/components/compat';
+import { Input, Tree } from 'antd';
 import { useCallback, useDeferredValue, useMemo, useRef, useState, type Key } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classNames from './namespaces-tree.module.scss';
@@ -110,7 +109,7 @@ const NamespacesTree = () => {
 
     return (
         <div className={classNames.container} ref={containerRef}>
-            <UxSearch
+            <Input.Search
                 size="small"
                 placeholder="Search"
                 value={search}
@@ -126,7 +125,7 @@ const NamespacesTree = () => {
             )}
             {isFetching && <LoadingPage style={{ height: '100%' }} />}
             {!isFetching && (
-                <UxTree
+                <Tree
                     treeData={treeData}
                     height={(containerRef.current?.clientHeight ?? 500) - 44}
                     checkable

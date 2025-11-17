@@ -1,6 +1,6 @@
 import { useAppSelector } from '@app/store/hooks';
 import { selectStatsState } from '@app/store/slices/calls-tree-context-slices';
-import { UxTableNew } from '@netcracker/ux-react';
+import { Table } from 'antd';
 import { memo, useMemo, type FC } from 'react';
 import { createCallStatsTableData, findTreeNode } from '../utils/calls-tree-operations';
 import { columnsFactory, type TableData } from './columns';
@@ -23,9 +23,9 @@ const CallStatsTable: FC = () => {
 
     return (
         <div className="table-container">
-            <UxTableNew<TableData>
+            <Table<TableData>
                 columns={columnsFactory()}
-                data={tableData}
+                dataSource={tableData}
                 loading={isFetching}
                 className="ux-table"
             />

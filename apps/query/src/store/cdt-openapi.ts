@@ -1,6 +1,6 @@
 import { openApi as api } from './openapi-query';
 import type { DashboardEntity } from './slices/calls-tree-context-slices';
-import { downloadFile } from '@netcracker/ux-react';
+import { downloadFile } from '@app/components/compat';
 
 const serializeCallsLoadRequest = (request: CallsLoadRequest): string => {
     const { filters, parameters, view } = request;

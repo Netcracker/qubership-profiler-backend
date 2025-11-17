@@ -1,7 +1,5 @@
-import { UxButton, UxDropdownNew, UxIcon, type UxDropdownNewItem } from '@netcracker/ux-react';
-import { ReactComponent as EditIcon } from '@netcracker/ux-assets/icons/edit/edit-outline-16.svg';
-import { ReactComponent as DeleteIcon } from '@netcracker/ux-assets/icons/delete/delete-outline-16.svg';
-import { ReactComponent as ActionsIcon } from '@netcracker/ux-assets/icons/actions/actions-20.svg';
+import { Button, Dropdown, Menu } from 'antd';
+import { EditOutlined, DeleteOutlined, MoreOutlined } from '@ant-design/icons';
 import type { FC } from 'react';
 import { useDisableWidgetFunction } from '../hooks/use-widgets';
 import { type Widget } from '@app/store/slices/calls-tree-context-slices';
@@ -9,7 +7,7 @@ import { type Widget } from '@app/store/slices/calls-tree-context-slices';
 const DefaultEntityActions: FC<Widget> = ({ i }) => {
     const disableWidget = useDisableWidgetFunction();
 
-    function handleClick(item: UxDropdownNewItem) {
+    function handleClick(item: any) {
         switch (item.id) {
             case 'edit':
                 console.log('Edit choosen: ', i);
@@ -20,25 +18,21 @@ const DefaultEntityActions: FC<Widget> = ({ i }) => {
         }
     }
 
+    const menu = (
+        <Menu onClick={({ key }) => handleClick({ id: key })}>
+            <Menu.Item key="edit" icon={<EditOutlined style={{ fontSize: 16 }} />}>
+                Edit
+            </Menu.Item>
+            <Menu.Item key="remove" className="amarant-label" icon={<DeleteOutlined style={{ fontSize: 16 }} />}>
+                Remove
+            </Menu.Item>
+        </Menu>
+    );
+
     return (
-        <UxDropdownNew
-            items={[
-                {
-                    id: 'edit',
-                    text: 'Edit',
-                    leftIcon: <UxIcon style={{ fontSize: 16 }} component={EditIcon} />,
-                },
-                {
-                    id: 'remove',
-                    text: 'Remove',
-                    className: 'amarant-label',
-                    leftIcon: <UxIcon style={{ fontSize: 16 }} component={DeleteIcon} />,
-                },
-            ]}
-            onItemClick={handleClick}
-        >
-            <UxButton type="light" leftIcon={<UxIcon component={ActionsIcon} />} />
-        </UxDropdownNew>
+        <Dropdown overlay={menu}>
+            <Button type="text" icon={<MoreOutlined />} />
+        </Dropdown>
     );
 };
 

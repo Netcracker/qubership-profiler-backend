@@ -1,7 +1,6 @@
 import React, { memo, type FC } from 'react';
-import { ContextBar, type ContextItemModel } from '@netcracker/cse-ui-components';
-import {UxIcon } from '@netcracker/ux-react';
-import { ReactComponent as CybeIcon } from '@netcracker/ux-assets/icons/cube/cube-20.svg';
+import { ContextBar, type ContextItemModel } from '@app/components/compat';
+import { BlockOutlined } from '@ant-design/icons';
 import { ESC_CALL_TREE_QUERY_PARAMS } from '@app/constants/query-params';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
@@ -23,7 +22,7 @@ const CallsTreeHeader: FC<CallsTreeHeaderProps> = ({ leftExtra, rightExtra }) =>
         {
             id: 'podName',
             name: <div className={cn('ux-typography-13px-medium', 'magnet-label')}>{podName}</div>,
-            icon: <UxIcon component={CybeIcon} />,
+            icon: <BlockOutlined />,
         },
         {
             id: 'time',

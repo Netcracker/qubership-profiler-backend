@@ -1,14 +1,14 @@
-import { ContentCard } from '@netcracker/cse-ui-components';
+import { ContentCard } from '@app/components/compat';
 import cn from 'classnames';
 import classNames from './calls-tree-dashboard-entity.module.scss';
 import DefaultEntityActions from './calls-tree-dashboard-entity-default-actions';
 import type { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '@app/store/hooks';
 import { callsTreeContextDataAction, selectStatsState } from '@app/store/slices/calls-tree-context-slices';
-import { ReactComponent as CancelIcon } from '@netcracker/ux-assets/icons/cancel/cancel-16.svg';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import CallStatsTable from '../call-tree-entity/call-stats-table/call-stats-table';
 import StatsTable from '../call-tree-entity/common-stats-table/stats-table';
-import { UxButton, UxIcon } from '@netcracker/ux-react';
+import { Button } from 'antd';
 
 const StatsEntity: FC = () => {
     const { selectedRowTitle } = useAppSelector(selectStatsState);
@@ -27,9 +27,7 @@ const StatsEntity: FC = () => {
             extra={
                 <div className="draggable-cancel">
                     {selectedRowTitle ? (
-                        <UxButton onClick={handleClose} type="light">
-                            {<UxIcon style={{ fontSize: 18 }} component={CancelIcon} />}
-                        </UxButton>
+                        <Button onClick={handleClose} type="text" icon={<CloseCircleOutlined style={{ fontSize: 18 }} />} />
                     ) : (
                         <DefaultEntityActions i="stats" />
                     )}

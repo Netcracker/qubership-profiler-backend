@@ -1,37 +1,35 @@
 import type { CallStatsInfo } from '@app/store/cdt-openapi';
-import { type UxTableNewColumn, type UxTableNewData } from '@netcracker/ux-react';
+import type { ColumnsType } from 'antd/es/table';
 import prettyMilliseconds from 'pretty-ms';
 
-export type TableData = UxTableNewData<CallStatsInfo>;
+export type TableData = CallStatsInfo;
 
-export const columnsFactory = (): UxTableNewColumn<TableData>[] => [
+export const columnsFactory = (): ColumnsType<TableData> => [
     {
-        name: 'Name',
-        type: 'accessor',
-        dataKey: 'name',
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
         width: 115,
-        cellRender: props => {
-            return props.getValue();
-        },
+        render: (value) => value,
     },
     {
-        name: 'method itself',
-        type: 'accessor',
-        dataKey: 'self',
+        title: 'method itself',
+        dataIndex: 'self',
+        key: 'self',
         width: 158,
-        cellRender: props => {
-            if (props.row.original.total) return prettyMilliseconds(Number(props.getValue()));
-            return props.getValue();
+        render: (value, record) => {
+            if (record.total) return prettyMilliseconds(Number(value));
+            return value;
         },
     },
     {
-        name: 'with children',
-        type: 'accessor',
-        dataKey: 'total',
+        title: 'with children',
+        dataIndex: 'total',
+        key: 'total',
         width: 131,
-        cellRender: props => {
-            if (props.getValue()) {
-                return prettyMilliseconds(props.getValue());
+        render: (value) => {
+            if (value) {
+                return prettyMilliseconds(value);
             }
         },
     },

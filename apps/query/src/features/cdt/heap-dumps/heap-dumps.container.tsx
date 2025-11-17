@@ -1,5 +1,5 @@
 import HeapDumpsTable from '@app/features/cdt/heap-dumps/heap-dumps-table';
-import { ContentCard } from '@netcracker/cse-ui-components';
+import { ContentCard } from '@app/components/compat';
 import React, { memo } from 'react';
 
 const HeapDumpsContainer = memo(() => {

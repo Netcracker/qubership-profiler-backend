@@ -1,4 +1,4 @@
-import { ContentCard } from '@netcracker/cse-ui-components';
+import { ContentCard } from '@app/components/compat';
 import cn from 'classnames';
 import classNames from './calls-tree-dashboard-entity.module.scss';
 import DefaultEntityActions from './calls-tree-dashboard-entity-default-actions';

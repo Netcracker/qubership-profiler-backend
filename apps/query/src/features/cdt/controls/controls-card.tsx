@@ -1,9 +1,8 @@
 import { userLocale } from '@app/common/user-locale';
 import { ESC_QUERY_PARAMS } from '@app/constants/query-params';
 import { defaultRange, defaultSelectedRange, fastRanges } from '@app/features/cdt/controls/fast-ranges';
-import { IsoDatePicker } from '@netcracker/cse-ui-components';
-import { SummaryCard } from '@netcracker/cse-ui-components/components/summary-card/summary-card';
-import { UxButton, UxRadio, UxTabs } from '@netcracker/ux-react';
+import { IsoDatePicker, SummaryCard } from '@app/components/compat';
+import { Button, Radio, Tabs } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import sub from 'date-fns/sub';
 import { useCallback, useMemo, useState } from 'react';
@@ -13,7 +12,7 @@ import { contextDataAction, useSearchParamsApplied } from '@app/store/slices/con
 import clsx from 'clsx';
 import { useAppDispatch } from '@app/store/hooks';
 import { useSidebarApiArgs } from '@app/features/cdt/hooks/use-sidebar-api-args';
-import type { Moment } from 'moment';
+import type { Dayjs } from 'dayjs';
 
 const ControlsCard = () => {
     const dispatch = useAppDispatch();
@@ -74,11 +73,11 @@ const ControlsCard = () => {
             }),
         [navigate, search]
     );
-    const formatPickerValue = useCallback((v: Moment) => (v ? v.toDate().toLocaleString(userLocale, {
+    const formatPickerValue = useCallback((v: Dayjs) => (v ? v.toDate().toLocaleString(userLocale, {
         hour12: false
     }) : ''), []);
     const disabledToDates = useCallback(
-        (d: Moment) => (from?.getTime() ? d.toDate().getTime() < from?.getTime() : false),
+        (d: Dayjs) => (from?.getTime() ? d.toDate().getTime() < from?.getTime() : false),
         [from]
     );
     return (
@@ -102,29 +101,29 @@ const ControlsCard = () => {
                         onChange={handleChangePicker(ESC_QUERY_PARAMS.dateTo)}
                         format={formatPickerValue}
                     />
-                    <UxRadio.Group value={selectedRange} onChange={handleChangeFastRange}>
+                    <Radio.Group value={selectedRange} onChange={handleChangeFastRange}>
                         {fastRanges.map(range => (
-                            <UxRadio.Button key={range.label} value={range.label}>
+                            <Radio.Button key={range.label} value={range.label}>
                                 {range.label}
-                            </UxRadio.Button>
+                            </Radio.Button>
                         ))}
-                    </UxRadio.Group>
-                    <UxButton
+                    </Radio.Group>
+                    <Button
                         onClick={() => dispatch(contextDataAction.setSearchParamsApplied(true))}
                         size="large"
                         disabled={selectedServices.length === 0}
                         className={clsx(classNames.applyButton, { [classNames.pulse]: !searchParamsApplied })}
                     >
                         Apply
-                    </UxButton>
+                    </Button>
                 </div>
             }
             footer={
-                <UxTabs activeKey={match?.params.activeKey} className="tabs-in-footer" onChange={handleChangeTab}>
-                    <UxTabs.TabPane tab="Calls" key={'calls'} />
-                    <UxTabs.TabPane tab="Pods Info" key={'pods-info'} />
-                    <UxTabs.TabPane tab="Heap Dumps" key={'heap-dumps'} />
-                </UxTabs>
+                <Tabs activeKey={match?.params.activeKey} className="tabs-in-footer" onChange={handleChangeTab}>
+                    <Tabs.TabPane tab="Calls" key={'calls'} />
+                    <Tabs.TabPane tab="Pods Info" key={'pods-info'} />
+                    <Tabs.TabPane tab="Heap Dumps" key={'heap-dumps'} />
+                </Tabs>
             }
         ></SummaryCard>
     );

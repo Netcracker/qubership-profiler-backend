@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { highlight } from '@netcracker/cse-ui-components/utils/highlight';
+import { highlight } from '@app/components/compat';
 import { useSearchParams } from 'react-router-dom';
 import { ESC_CALL_TREE_QUERY_PARAMS } from '@app/constants/query-params';
 import { escapeRegExp } from 'lodash';

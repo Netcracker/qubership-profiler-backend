@@ -3,7 +3,8 @@ import { ESC_QUERY_PARAMS } from '@app/constants/query-params';
 import { defaultRange, defaultSelectedRange, fastRanges } from '@app/features/cdt/controls/fast-ranges';
 import { IsoDatePicker } from '@app/components/iso-date-picker/iso-date-picker';
 import { SummaryCard } from '@app/components/summary-card/summary-card';
-import { Button, Select, Tabs } from 'antd';
+import { Button, Radio, Tabs } from 'antd';
+import type { RadioChangeEvent } from 'antd';
 import sub from 'date-fns/sub';
 import { useCallback, useMemo, useState } from 'react';
 import { useMatch, useNavigate, useSearchParams } from 'react-router-dom';
@@ -24,10 +25,10 @@ const ControlsCard = () => {
     const [selectedServices] = useSidebarApiArgs();
 
     const handleChangeFastRange = useCallback(
-        (value: string) => {
+        (e: RadioChangeEvent) => {
             dispatch(contextDataAction.setSearchParamsApplied(false));
-            setSelectedRange(value);
-            const range = fastRanges.find(range => range.label === value);
+            setSelectedRange(e.target.value);
+            const range = fastRanges.find(range => range.label === e.target.value);
             if (range) {
                 setSearchParams(prev => {
                     prev.set(
@@ -101,15 +102,13 @@ const ControlsCard = () => {
                         onChange={handleChangePicker(ESC_QUERY_PARAMS.dateTo)}
                         format={formatPickerValue}
                     />
-                    <Select
-                        value={selectedRange}
-                        onChange={handleChangeFastRange}
-                        options={fastRanges.map(range => ({
-                            label: range.label,
-                            value: range.label,
-                        }))}
-                        style={{ width: 150 }}
-                    />
+                    <Radio.Group value={selectedRange} onChange={handleChangeFastRange}>
+                        {fastRanges.map(range => (
+                            <Radio.Button key={range.label} value={range.label}>
+                                {range.label}
+                            </Radio.Button>
+                        ))}
+                    </Radio.Group>
                     <Button
                         onClick={() => dispatch(contextDataAction.setSearchParamsApplied(true))}
                         size="large"

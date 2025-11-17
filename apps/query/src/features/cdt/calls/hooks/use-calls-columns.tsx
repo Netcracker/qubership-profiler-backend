@@ -1,4 +1,4 @@
-import type { RequiredBy } from '@app/common/type-utils';
+import type { SetRequired } from 'type-fest';
 import HtmlEllipsis from '@app/components/html-ellipsis/html-ellipsis';
 import { useCallsStoreSelector } from '@app/features/cdt/calls/calls-store';
 import type { CallInfo } from '@app/store/cdt-openapi';
@@ -18,7 +18,7 @@ const timestampFormat: Intl.DateTimeFormatOptions = {
     fractionalSecondDigits: 3,
 };
 
-export const DEFAULT_CALLS_COLUMNS: RequiredBy<ColumnType<CallInfo>, 'key'>[] = [
+export const DEFAULT_CALLS_COLUMNS: SetRequired<ColumnType<CallInfo>, 'key'>[] = [
     {
         title: 'Start Timestamp',
         key: 'timestamp',

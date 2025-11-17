@@ -1,26 +1,17 @@
 /**
- * @deprecated Use type-fest instead
- * Import: import type { SetOptional } from 'type-fest'
+ * Type utilities for the application
  *
- * Makes Partial only specified keys.
- */
-export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-
-/**
- * @deprecated Use type-fest instead
- * Custom implementation - no direct type-fest equivalent
+ * This file now re-exports utilities from type-fest.
+ * Custom implementations have been removed in favor of the industry-standard library.
  *
- * Makes required only specified keys. Other will be optional or Partial
+ * For migration guide, see: https://github.com/sindresorhus/type-fest
  */
-export type RequiredOnly<T, K extends keyof T> = Partial<Omit<T, K>> & Required<Pick<T, K>>;
 
-/**
- * @deprecated Use type-fest instead
- * Import: import type { SetRequired } from 'type-fest'
- *
- * Makes required only specified keys.
- */
-export type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
-
-// Re-export type-fest utilities for migration
-export type { SetOptional, SetRequired } from 'type-fest';
+// Re-export commonly used type-fest utilities
+export type {
+    SetOptional,   // Replaces PartialBy<T, K>
+    SetRequired,   // Replaces RequiredBy<T, K>
+    Simplify,      // Flattens intersections for better DX
+    ReadonlyDeep,  // Makes all properties recursively readonly
+    PartialDeep,   // Makes all properties recursively optional
+} from 'type-fest';

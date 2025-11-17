@@ -20,6 +20,7 @@ import {
     type Key,
     memo,
     useCallback,
+    useEffect,
     useLayoutEffect,
     useMemo,
     useRef,
@@ -29,6 +30,7 @@ import type { ResizeCallbackData } from 'react-resizable';
 import classNames from './calls-table.module.scss';
 import { type ColumnWidthsMap, appDataActions, selectCallsColumnWidths } from '@app/store/slices/app-state.slice';
 import { useCallsStore } from '@app/features/cdt/calls/calls-store';
+import { useInView } from 'react-intersection-observer';
 
 function callsErrorMessage(error: unknown) {
     let message = 'Calls Info is Unavailable. The backend server encountered an error and could not complete request.';
@@ -132,35 +134,20 @@ const CallsTable: FC = memo(() => {
         });
     }, [columnWidths, columns, handleResize, handleResizeStop]);
 
-    const handleBottomReached = useCallback(
-        (event: Event) => {
-            const target = event.target as HTMLElement;
-            const maxScroll = target.scrollHeight - target.clientHeight;
-            const currentScroll = target.scrollTop;
-            if (currentScroll === maxScroll) {
-                if (!isFetching) {
-                    // console.log(data?.status)
-                    const rows = data?.status?.filteredRecords || 0;
-                    // console.log(rows);
-                    const pages = Math.ceil(rows / 100);
-                    // console.log(pages);
-                    dispatch(contextDataAction.setMaxPage( pages ));
-                    dispatch(contextDataAction.nextCallsPage());
-                }
-            }
-        },
-        [dispatch, isFetching]
-    );
-    useLayoutEffect(() => {
-        const tableContent = document.querySelector('.dynamicTable .ux-table-body');
-        if (tableContent) {
-            tableContent.addEventListener('scroll', handleBottomReached);
-        }
+    // Infinite scroll with Intersection Observer API
+    const { ref: scrollSentinelRef, inView } = useInView({
+        threshold: 0,
+        rootMargin: '100px', // Start loading 100px before reaching the bottom
+    });
 
-        return () => {
-            tableContent?.removeEventListener('scroll', handleBottomReached);
-        };
-    }, [handleBottomReached]);
+    useEffect(() => {
+        if (inView && !isFetching && data) {
+            const rows = data?.status?.filteredRecords || 0;
+            const pages = Math.ceil(rows / 100);
+            dispatch(contextDataAction.setMaxPage(pages));
+            dispatch(contextDataAction.nextCallsPage());
+        }
+    }, [inView, isFetching, data, dispatch]);
 
     const handleTableChange = useCallback(
         (
@@ -239,6 +226,8 @@ const CallsTable: FC = memo(() => {
                     loading={isFetching && tableIndicator}
                     scroll={tableScroll}
                 />
+                {/* Infinite scroll sentinel - triggers loading when visible */}
+                <div ref={scrollSentinelRef} style={{ height: 1, width: '100%' }} />
             </div>
         </div>
     );

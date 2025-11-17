@@ -3,7 +3,7 @@ import useCallsFetchArg from '@app/features/cdt/calls/use-calls-fetch-arg';
 import { useCallsStoreSelector } from '@app/features/cdt/calls/calls-store';
 import { useGetCallsStatisticsByConditionQuery } from '@app/store/cdt-openapi';
 import classNames from "@app/features/cdt/calls/calls-chart.module.scss";
-import { unix } from 'moment';
+import dayjs from 'dayjs';
 import {userLocale} from "@app/common/user-locale";
 
 // Type definition for chart data point: [timestamp, duration, calls]
@@ -99,7 +99,7 @@ const CallsChart = () => {
             },
             tooltip: {
               formatter: (param: EChartsFormatterParam) => {
-                  const ts = unix(param.data[0]/1000).toDate().toLocaleString(userLocale, {hour12: false });
+                  const ts = dayjs.unix(param.data[0]/1000).toDate().toLocaleString(userLocale, {hour12: false });
                   return [
                       '<b>' + ts + '</b> <br/>',
                       'Duration: ' + param.data[1] + ' ms<br/>',

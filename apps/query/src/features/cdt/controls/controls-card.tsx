@@ -3,8 +3,7 @@ import { ESC_QUERY_PARAMS } from '@app/constants/query-params';
 import { defaultRange, defaultSelectedRange, fastRanges } from '@app/features/cdt/controls/fast-ranges';
 import { IsoDatePicker } from '@app/components/iso-date-picker/iso-date-picker';
 import { SummaryCard } from '@app/components/summary-card/summary-card';
-import { Button, Radio, Tabs } from 'antd';
-import type { RadioChangeEvent } from 'antd';
+import { Button, Select, Tabs } from 'antd';
 import sub from 'date-fns/sub';
 import { useCallback, useMemo, useState } from 'react';
 import { useMatch, useNavigate, useSearchParams } from 'react-router-dom';
@@ -13,7 +12,7 @@ import { contextDataAction, useSearchParamsApplied } from '@app/store/slices/con
 import clsx from 'clsx';
 import { useAppDispatch } from '@app/store/hooks';
 import { useSidebarApiArgs } from '@app/features/cdt/hooks/use-sidebar-api-args';
-import type { Moment } from 'moment';
+import type { Dayjs } from 'dayjs';
 
 const ControlsCard = () => {
     const dispatch = useAppDispatch();
@@ -25,10 +24,10 @@ const ControlsCard = () => {
     const [selectedServices] = useSidebarApiArgs();
 
     const handleChangeFastRange = useCallback(
-        (e: RadioChangeEvent) => {
+        (value: string) => {
             dispatch(contextDataAction.setSearchParamsApplied(false));
-            setSelectedRange(e.target.value);
-            const range = fastRanges.find(range => range.label === e.target.value);
+            setSelectedRange(value);
+            const range = fastRanges.find(range => range.label === value);
             if (range) {
                 setSearchParams(prev => {
                     prev.set(
@@ -74,11 +73,11 @@ const ControlsCard = () => {
             }),
         [navigate, search]
     );
-    const formatPickerValue = useCallback((v: Moment) => (v ? v.toDate().toLocaleString(userLocale, {
+    const formatPickerValue = useCallback((v: Dayjs) => (v ? v.toDate().toLocaleString(userLocale, {
         hour12: false
     }) : ''), []);
     const disabledToDates = useCallback(
-        (d: Moment) => (from?.getTime() ? d.toDate().getTime() < from?.getTime() : false),
+        (d: Dayjs) => (from?.getTime() ? d.toDate().getTime() < from?.getTime() : false),
         [from]
     );
     return (
@@ -102,13 +101,15 @@ const ControlsCard = () => {
                         onChange={handleChangePicker(ESC_QUERY_PARAMS.dateTo)}
                         format={formatPickerValue}
                     />
-                    <Radio.Group value={selectedRange} onChange={handleChangeFastRange}>
-                        {fastRanges.map(range => (
-                            <Radio.Button key={range.label} value={range.label}>
-                                {range.label}
-                            </Radio.Button>
-                        ))}
-                    </Radio.Group>
+                    <Select
+                        value={selectedRange}
+                        onChange={handleChangeFastRange}
+                        options={fastRanges.map(range => ({
+                            label: range.label,
+                            value: range.label,
+                        }))}
+                        style={{ width: 150 }}
+                    />
                     <Button
                         onClick={() => dispatch(contextDataAction.setSearchParamsApplied(true))}
                         size="large"

@@ -1,7 +1,7 @@
 import { DatePicker } from 'antd';
 import type { DatePickerProps } from 'antd';
-import type { Moment } from 'moment';
-import moment from 'moment';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import React from 'react';
 
 export interface IsoDatePickerProps extends Omit<DatePickerProps, 'value' | 'onChange'> {
@@ -9,8 +9,8 @@ export interface IsoDatePickerProps extends Omit<DatePickerProps, 'value' | 'onC
     value?: string;
     time?: boolean;
     onChange?: (value?: string) => void;
-    format?: (value: Moment) => string;
-    disabledDate?: (current: Moment) => boolean;
+    format?: (value: Dayjs) => string;
+    disabledDate?: (current: Dayjs) => boolean;
 }
 
 export const IsoDatePicker: React.FC<IsoDatePickerProps> = ({
@@ -21,9 +21,9 @@ export const IsoDatePicker: React.FC<IsoDatePickerProps> = ({
     format,
     ...props
 }) => {
-    const momentValue = value ? moment(value) : undefined;
+    const dayjsValue = value ? dayjs(value) : undefined;
 
-    const handleChange = (date: Moment | null) => {
+    const handleChange = (date: Dayjs | null) => {
         if (onChange) {
             onChange(date ? date.toISOString() : undefined);
         }
@@ -34,10 +34,10 @@ export const IsoDatePicker: React.FC<IsoDatePickerProps> = ({
             {label && <label className="iso-date-picker-label">{label}</label>}
             <DatePicker
                 {...props}
-                value={momentValue}
+                value={dayjsValue}
                 onChange={handleChange}
                 showTime={time}
-                format={format ? (value) => format(value as Moment) : undefined}
+                format={format ? (value) => format(value as Dayjs) : undefined}
             />
         </div>
     );

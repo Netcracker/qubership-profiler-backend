@@ -2,7 +2,7 @@
 import ColumnsPopover from '@app/features/cdt/calls/columns-popover';
 import {useAppDispatch} from '@app/store/hooks';
 import {contextDataAction} from '@app/store/slices/context-slices';
-import { Input, Radio, Tooltip } from 'antd';
+import { Input, Select, Tooltip } from 'antd';
 import {memo, useMemo} from 'react';
 import classNames from './content-controls.module.scss';
 import {ESC_QUERY_PARAMS} from "@app/constants/query-params";
@@ -35,24 +35,25 @@ const ContentControls = () => {
 
     return (
         <div className={classNames.contentControls}>
-            <Radio.Group
+            <Select
                 size="small"
                 value={durationFrom}
-                onChange={e => {
+                onChange={value => {
                     dispatch(contextDataAction.toFirstPage());
                     setUrlParams(s => {
-                        s.set(ESC_QUERY_PARAMS.callsDuration, e.target.value.toString());
+                        s.set(ESC_QUERY_PARAMS.callsDuration, value.toString());
                         return s;
                     });
-                }
-                }
-            >
-                <Radio.Button value={0}>All</Radio.Button>
-                <Radio.Button value={10}>{'>10ms'}</Radio.Button>
-                <Radio.Button value={100}>{'>100ms'}</Radio.Button>
-                <Radio.Button value={3000}>{'>3sec'}</Radio.Button>
-                <Radio.Button value={5000}>{'>5sec'}</Radio.Button>
-            </Radio.Group>
+                }}
+                options={[
+                    { label: 'All', value: 0 },
+                    { label: '>10ms', value: 10 },
+                    { label: '>100ms', value: 100 },
+                    { label: '>3sec', value: 3000 },
+                    { label: '>5sec', value: 5000 },
+                ]}
+                style={{ width: 100 }}
+            />
             <Tooltip
                 title={
                     <div>

@@ -205,7 +205,7 @@ func (c *Client) CreateDumpsTempTable(ctx context.Context, t time.Time) (*invent
 	return c.createTempTable(ctx, tableName, model.TableDumps, timeHour, DumpsTableLifetime, DumpsTempSchema, schemaArgs)
 }
 
-// CreateInvertedIndexTable registers and creates a temp table for dumps data at the given timestamp
+// CreateInvertedIndexTable registers and creates a temp table for dumps data for the given timestamp
 func (c *Client) CreateInvertedIndexTable(ctx context.Context, t time.Time, tableName string, ttl time.Duration) (*inventory.TempTableInfo, error) {
 
 	// TODO: Prepare reason of using this check

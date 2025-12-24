@@ -100,7 +100,7 @@ type DbClient interface {
 	GetPodRestarts(ctx context.Context, namespace string, service string, podName string) ([]*model.PodRestart, error)
 	GetCallsTimeBetween(ctx context.Context, namespace string, ts time.Time) ([]*model.Call, error)
 	GetCallsWithTraceTimeBetween(ctx context.Context, namespace string, pod *model.PodInfo, callTbName, traceTbName string, upperBound, lowerBound time.Time) ([]*model.CallWithTraces, error)
-	GetTagByPosition(ctx context.Context, position int) (string, error)
+	GetTagByPositionAndPodId(ctx context.Context, position int, podId string) (string, error)
 	GetTableMetadata(ctx context.Context, tbName string) (rowsCount int, size int64, totalSize int64, err error)
 	GetDumpsTimeBetween(ctx context.Context, pod *model.PodInfo, dumpsTbName string, upperBound, lowerBound time.Time) ([]*model.Dump, error)
 	GetTempTablesNames(ctx context.Context) ([]string, error)

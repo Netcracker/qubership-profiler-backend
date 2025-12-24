@@ -425,20 +425,21 @@ func (c *Client) GetDumpsTimeBetween(ctx context.Context, pod *model.PodInfo, du
 	return dumps, nil
 }
 
-func (c *Client) GetTagByPosition(ctx context.Context, position int) (string, error) {
+func (c *Client) GetTagByPositionAndPodId(ctx context.Context, position int, podId string) (string, error) {
 	startTime := time.Now()
-	log.Debug(ctx, "Start execution GetTagByPosition for position %d", position)
+	log.Debug(ctx, "Start execution GetTagByPositionAndPodId for position %d and pod_name %s", position, podId)
 
 	var tag string
-	query := fmt.Sprintf(queries.GetTagByPosition, DictionaryTable)
-	row := c.conn.QueryRow(ctx, query, position)
+	query := fmt.Sprintf(queries.GetTagByPositionAndPodId, DictionaryTable)
+	row := c.conn.QueryRow(ctx, query, position, podId)
 
 	if err := row.Scan(&tag); err != nil {
-		log.Error(ctx, err, "problem with scanning the result when getting tag by position %d from table %s", position, DictionaryTable)
+		log.Error(ctx, err, "problem with scanning the result when getting tag by position %d and pod_name %s from table %s",
+			position, podId, DictionaryTable)
 		return "", err
 	}
 
-	log.Debug(ctx, "GetTagByPosition is finished. Tag is %s. [Execution time - %v]", tag, time.Since(startTime))
+	log.Debug(ctx, "GetTagByPositionAndPodId is finished. Tag is %s. [Execution time - %v]", tag, time.Since(startTime))
 	return tag, nil
 }
 

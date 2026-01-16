@@ -33,4 +33,4 @@ All variables are listed in the table below:
 | `--minio.use_ssl`  | `false`                                                                   | Use SSL access for Minio                                                                                          |
 | `--minio.ca_file`  | ""                                                                        | Path to custom CA certificate for Minio                                                                           |
 | `--run.cron`       | `false`                                                                   | Run maintenance job with cron                                                                                     |
-| `--run.config`     |                                                                           | Job configuration file location. See [job configuration](./../public/job_configuration.md) for details            |
+| `--run.config`     |                                                                           | Job configuration file location. See [job configuration](./../job_configuration.md) for details            |

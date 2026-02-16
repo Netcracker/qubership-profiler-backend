@@ -1,0 +1,109 @@
+#!/bin/ash
+
+the_namespace="$1"
+archiveAfterWithNamespace="$2"
+stopArchivingAfterWithNamespace="$3"
+deleteAfterWithNamespace="$4"
+dryRun=$5
+
+log() {
+  echo "[$(date +%FT%T%Z)][INFO][class=cleanup-namespace.sh] $1"
+}
+
+notDryRun() {
+  if [ "${dryRun}" == "dry-run" ] ; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+shouldDelete() {
+  file=$1
+  prefixLen=${#file}
+  upperPrefix="$( echo "$2" | cut -c1-"${prefixLen}")"
+
+  # If it either NOT exist or NOT a directory, so return from function and return exit code 1 (Error)
+  if [ ! -d "${file}" ] ; then
+    return 1
+  fi
+
+  if [[ "${file}" \< "${upperPrefix}" ]] ; then
+    return 0
+  fi
+  log "Do not delete ${file} because it upper than ${upperPrefix}"
+  return 1
+}
+
+shouldArchive() {
+  file=$1
+  prefixLen=${#file}
+  upperPrefix="$( echo "$2" | cut -c1-"${prefixLen}")"
+  lowerPrefix="$( echo "$3" | cut -c1-"${prefixLen}")"
+
+  if [ ! -d "${file}" ] ; then
+    log "Do not archive ${file} because it is not a directory"
+    return 1
+  fi
+
+  if [[ "${file}" \< "${upperPrefix}" || "${file}" == "${upperPrefix}" ]] ; then
+    if [[ "${file}" \> "${lowerPrefix}" || "${file}" == "${lowerPrefix}" ]] ; then
+      return 0
+    else
+      log "Do not archive ${file} because it is lower than ${lowerPrefix}"
+      return 1
+    fi
+  fi
+  log "Do not archive ${file} because it is upper than ${upperPrefix}"
+  return 1
+}
+
+doNotArchive() {
+  if shouldDelete "$1" "$4" ; then
+    log "Deleting       $1"
+    if notDryRun ; then
+      rm -rf "$1"
+    fi
+    return 0
+  elif shouldArchive "$1" "$2" "$3" ; then
+    return 1
+  fi
+  return 0
+}
+
+performCleanup() {
+  namespace="$1"
+  log "Starting cleanup and archiving of ${namespace}"
+  for year in "${namespace}"/* ; do
+    # Skip cleanup.lock file
+    if [[ "${year}" == *".lock"* ]] ; then
+      continue
+    fi
+
+    if doNotArchive "${year}" "${archiveAfterWithNamespace}" "${stopArchivingAfterWithNamespace}" "${deleteAfterWithNamespace}" ; then
+      continue
+    fi
+    for month in "${year}"/* ; do
+      if doNotArchive "${month}" "${archiveAfterWithNamespace}" "${stopArchivingAfterWithNamespace}" "${deleteAfterWithNamespace}" ; then
+        continue
+      fi
+      for day in "${month}"/* ; do
+        if doNotArchive "${day}" "${archiveAfterWithNamespace}" "${stopArchivingAfterWithNamespace}" "${deleteAfterWithNamespace}" ; then
+          continue
+        fi
+        for hour in "${day}"/* ; do
+          if doNotArchive "${hour}" "${archiveAfterWithNamespace}" "${stopArchivingAfterWithNamespace}" "${deleteAfterWithNamespace}" ; then
+            continue
+          fi
+          log "Archiving hour ${hour} to ${hour}.zip"
+          if notDryRun ; then
+            zip -rqu "${hour}.zip" "${hour}"
+            rm -rf "${hour}"
+          fi
+        done
+      done
+    done
+  done
+}
+
+performCleanup "${the_namespace}"

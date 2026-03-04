@@ -20,6 +20,10 @@ elif [ -n "${DIAG_PV_MOUNT_PATH}" ] ; then
   mkdir -p "${DIAG_PV_MOUNT_PATH}"/diagnostic
 
   sed -i "s^###^^" /etc/nginx/nginx.conf
+    
+  log "Starting PV cleanup (archive and delete old diagnostic files)"
+  /scripts/cleanup.sh > /dev/stdout 2>&1 &
+  pids="$pids $!"
 else
   REPLACEMENT="return 403 'Diagnostic storage has not been configured. Please specify either DIAG_HTTP_STORAGE_HOST or DIAG_PV_MOUNT_PATH';"
   log "Neither 'DIAG_HTTP_STORAGE_HOST' nor 'DIAG_PV_MOUNT_PATH' have been specified. Diagnostic files will be discarded"

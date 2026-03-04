@@ -44,6 +44,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository_owner }}/qubership-profiler-dumps-collector
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -70,3 +72,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Package link
+        run: |
+          echo "## Package published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**View package:** [ghcr.io/${{ github.repository_owner }}/qubership-profiler-dumps-collector](https://github.com/${{ github.repository }}/pkgs/container/qubership-profiler-dumps-collector)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "If the package does not appear in the repo sidebar, open the link above → **Package settings** → **Manage repository access** / **Link repository** and connect this repo." >> $GITHUB_STEP_SUMMARY

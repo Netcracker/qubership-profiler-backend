@@ -1,0 +1,75 @@
+# Publish qubership-profiler-dumps-collector to this repo's GitHub Container Registry.
+# Package will appear at: https://github.com/OWNER/REPO/pkgs/container/qubership-profiler-dumps-collector
+# Pull with: docker pull ghcr.io/OWNER/qubership-profiler-dumps-collector:TAG
+
+name: Publish dumps-collector (GHCR)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'apps/dumps-collector/**'
+      - 'tools/**'
+      - 'go.mod'
+      - 'go.sum'
+      - '.github/workflows/publish-dumps-collector.yaml'
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Optional image tag (e.g. v1.0.0). Default: branch name or release tag.'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE_NAME: qubership-profiler-dumps-collector
+
+jobs:
+  build-and-push:
+    name: Build and push ${{ env.IMAGE_NAME }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker meta (tags and labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+            type=raw,value=${{ github.event.inputs.tag }},enable=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag != '' }}
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/dumps-collector/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

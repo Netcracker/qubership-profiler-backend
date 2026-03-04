@@ -20,18 +20,28 @@ notDryRun() {
 
 shouldDelete() {
   file=$1
-  prefixLen=${#file}
-  upperPrefix="$( echo "$2" | cut -c1-"${prefixLen}")"
+  deleteThreshold=$2
 
   # If it either NOT exist or NOT a directory, so return from function and return exit code 1 (Error)
   if [ ! -d "${file}" ] ; then
     return 1
   fi
 
-  if [[ "${file}" \< "${upperPrefix}" ]] ; then
+  # Truncate threshold to same path depth (component count) as file, then compare.
+  # Character-based truncation was wrong: e.g. ./ns/2026/02 vs first-30-chars of
+  # ./ns/2026/02/22/10/43/23 gives ./ns/2026/02/22, so "02" < "22" and we'd delete whole month.
+  numComp=1
+  tmp="${file}"
+  while [ -n "${tmp}" ] ; do
+    case "${tmp}" in */*) numComp=$(( numComp + 1 )); tmp="${tmp#*/}";; *) tmp="";; esac
+  done
+  thresholdAtSameDepth=$(echo "${deleteThreshold}" | cut -d'/' -f1-"${numComp}")
+
+  # Delete only if path is strictly before threshold at this depth
+  if [ "${file}" \< "${thresholdAtSameDepth}" ] ; then
     return 0
   fi
-  log "Do not delete ${file} because it upper than ${upperPrefix}"
+  log "Do not delete ${file} because it upper than ${thresholdAtSameDepth}"
   return 1
 }
 
@@ -46,8 +56,8 @@ shouldArchive() {
     return 1
   fi
 
-  if [[ "${file}" \< "${upperPrefix}" || "${file}" == "${upperPrefix}" ]] ; then
-    if [[ "${file}" \> "${lowerPrefix}" || "${file}" == "${lowerPrefix}" ]] ; then
+  if [ "${file}" \< "${upperPrefix}" ] || [ "${file}" = "${upperPrefix}" ] ; then
+    if [ "${file}" \> "${lowerPrefix}" ] || [ "${file}" = "${lowerPrefix}" ] ; then
       return 0
     else
       log "Do not archive ${file} because it is lower than ${lowerPrefix}"
@@ -62,7 +72,7 @@ doNotArchive() {
   if shouldDelete "$1" "$4" ; then
     log "Deleting       $1"
     if notDryRun ; then
-      rm -rf "$1"
+      rm -rf "$1" || log "Failed to delete $1 (exit code $?)"
     fi
     return 0
   elif shouldArchive "$1" "$2" "$3" ; then

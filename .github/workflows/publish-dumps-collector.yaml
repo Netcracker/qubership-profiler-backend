@@ -28,12 +28,9 @@ permissions:
   contents: read
   packages: write
 
-env:
-  IMAGE_NAME: qubership-profiler-dumps-collector
-
 jobs:
   build-and-push:
-    name: Build and push ${{ env.IMAGE_NAME }}
+    name: Build and push qubership-profiler-dumps-collector
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -46,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          images: ghcr.io/${{ github.repository_owner }}/qubership-profiler-dumps-collector
           tags: |
             type=ref,event=branch
             type=ref,event=pr

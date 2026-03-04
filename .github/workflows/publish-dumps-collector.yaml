@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - master
+      - feat/shell-cleanup-dumps-collector
     paths:
       - 'apps/dumps-collector/**'
       - 'tools/**'

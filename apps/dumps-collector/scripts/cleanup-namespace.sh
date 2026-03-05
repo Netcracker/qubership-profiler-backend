@@ -68,6 +68,8 @@ shouldArchive() {
   return 1
 }
 
+# Returns 0 only when path was deleted (caller should skip children).
+# Returns 1 when path was not deleted (caller must descend into children to delete/archive).
 doNotArchive() {
   if shouldDelete "$1" "$4" ; then
     log "Deleting       $1"
@@ -75,10 +77,12 @@ doNotArchive() {
       rm -rf "$1" || log "Failed to delete $1 (exit code $?)"
     fi
     return 0
-  elif shouldArchive "$1" "$2" "$3" ; then
+  fi
+  if shouldArchive "$1" "$2" "$3" ; then
     return 1
   fi
-  return 0
+  # Keep zone: not deleted, not in archive window; must descend to check children (e.g. 02/13 under 02)
+  return 1
 }
 
 performCleanup() {

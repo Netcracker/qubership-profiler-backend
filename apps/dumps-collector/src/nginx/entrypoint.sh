@@ -19,8 +19,11 @@ elif [ -n "${DIAG_PV_MOUNT_PATH}" ] ; then
   log "Saving diagnostic files to ${DIAG_PV_MOUNT_PATH}"
   mkdir -p "${DIAG_PV_MOUNT_PATH}"/diagnostic
 
-  sed -i "s^###^^" /etc/nginx/nginx.conf
-    
+  # Only enable /esc and /cdt proxy when Go API container is present (scripts-only mode: leave commented to avoid 502)
+  if [ -n "${DIAG_API_ENABLED}" ] && [ "${DIAG_API_ENABLED}" != "0" ] && [ "${DIAG_API_ENABLED}" != "false" ] ; then
+    sed -i "s^###^^" /etc/nginx/nginx.conf
+  fi
+
   log "Starting PV cleanup (archive and delete old diagnostic files)"
   /scripts/cleanup.sh > /dev/stdout 2>&1 &
   pids="$pids $!"

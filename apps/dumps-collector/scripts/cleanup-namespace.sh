@@ -109,6 +109,11 @@ performCleanup() {
           if doNotArchive "${hour}" "${archiveAfterWithNamespace}" "${stopArchivingAfterWithNamespace}" "${deleteAfterWithNamespace}" ; then
             continue
           fi
+          # Skip already-archived hours (e.g. 23.zip); otherwise we would create 23.zip.zip, then 23.zip.zip.zip, etc.
+          if [ -f "${hour}" ] && [ "${hour%.zip}" != "${hour}" ] ; then
+            log "Skipping already archived hour ${hour}"
+            continue
+          fi
           log "Archiving hour ${hour} to ${hour}.zip"
           if notDryRun ; then
             zip -rqu "${hour}.zip" "${hour}"

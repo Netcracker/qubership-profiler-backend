@@ -1,7 +1,7 @@
 # Cloud Profiler Dumps Collector Makefile
 # Go application with Docker build
 
-.PHONY: help build clean docker-build docker-tag archive test run
+.PHONY: help build clean docker-build docker-build-scripts docker-tag archive test test-scripts test-docker-scripts run
 
 # Variables
 ARTIFACT_NAME := cloud-profiler-dumps-collector
@@ -9,6 +9,8 @@ BUILD_DIR := build
 OUTPUT_DIR := $(BUILD_DIR)/_output
 SAAS_MANIFEST_DIR := deployments
 DOCKER_IMAGE := $(ARTIFACT_NAME)
+# Image name for Dockerfile.scripts (from .qubership/docker-build-config.cfg)
+DOCKER_IMAGE_SCRIPTS := qubership-profiler-dumps-collector-scripts
 BINARY_NAME := prf_dump_writer
 
 # Build settings - can be overridden for cross-compilation
@@ -18,14 +20,17 @@ GOARCH ?= $(shell go env GOARCH)
 # Default target
 help:
 	@echo "Available targets:"
-	@echo "  build         - Build the Go application"
-	@echo "  clean         - Clean build artifacts"
-	@echo "  docker-build  - Build Docker image"
-	@echo "  docker-tag    - Tag Docker image (requires DOCKER_NAMES variable)"
-	@echo "  archive       - Create deployment archive"
-	@echo "  test          - Run tests"
-	@echo "  run           - Run the application locally"
-	@echo "  all           - Build, docker-build, and archive"
+	@echo "  build               - Build the Go application"
+	@echo "  clean               - Clean build artifacts"
+	@echo "  docker-build        - Build Docker image (full: Nginx + Go server)"
+	@echo "  docker-build-scripts - Build Dockerfile.scripts image (Nginx + cleanup, no Postgres required)"
+	@echo "  docker-tag          - Tag Docker image (requires DOCKER_NAMES variable)"
+	@echo "  archive             - Create deployment archive"
+	@echo "  test                - Run Go tests"
+	@echo "  test-scripts        - Run Go tests for Dockerfile.scripts (envconfig, no PG params)"
+	@echo "  test-docker-scripts - Build and run Dockerfile.scripts container without PG (requires Docker)"
+	@echo "  run                 - Run the application locally"
+	@echo "  all                 - Build, docker-build, and archive"
 
 # Clean build artifacts
 clean:
@@ -50,6 +55,26 @@ test:
 	else \
 		echo "Go not found, skipping tests."; \
 	fi
+
+# Run tests relevant to Dockerfile.scripts (deploy without Postgres params)
+test-scripts:
+	@echo "==> Running Dockerfile.scripts tests..."
+	@if command -v go >/dev/null 2>&1; then \
+		go test ./pkg/envconfig/... -v -run 'DockerfileScripts|PostgresParamNames|InitConfig'; \
+	else \
+		echo "Go not found, skipping tests."; \
+	fi
+
+# Build Dockerfile.scripts image (from repo root; run from apps/dumps-collector)
+docker-build-scripts:
+	@echo "==> Building Dockerfile.scripts image ($(DOCKER_IMAGE_SCRIPTS))..."
+	docker build --pull -t $(DOCKER_IMAGE_SCRIPTS) -f Dockerfile.scripts ../..
+
+# Build and run Dockerfile.scripts container without Postgres params (integration test)
+test-docker-scripts: docker-build-scripts
+	@echo "==> Running Dockerfile.scripts container test (no PG params)..."
+	@chmod +x tests/scripts/test-dockerfile-scripts.sh 2>/dev/null || true
+	@cd ../.. && apps/dumps-collector/tests/scripts/test-dockerfile-scripts.sh $(DOCKER_IMAGE_SCRIPTS)
 
 # Run the application locally
 run: build

@@ -64,26 +64,38 @@ Set default value for dumps-collector ingress host if not specify in Values.
 Find a dumpsCollector image in various places.
 Image can be found from:
 * .Values.dumpsCollector.image from values file
-* SaaS/App deployer (or groovy.deploy.v3) from .Values.deployDescriptor "cloud-profiler-dumps-collector" "image"
+* SaaS/App deployer (or groovy.deploy.v3) from .Values.deployDescriptor:
+  - when .Values.dumpsCollector.useScriptsImage=true:
+    "cloud-profiler-dumps-collector-scripts" first, then fallback to "cloud-profiler-dumps-collector"
+  - otherwise:
+    "cloud-profiler-dumps-collector"
 */}}
 {{- define "dumpsCollector.image" -}}
   {{- if .Values.dumpsCollector.image -}}
     {{- printf "%s" .Values.dumpsCollector.image -}}
   {{- else -}}
+    {{- $useScriptsImage := .Values.dumpsCollector.useScriptsImage | default false -}}
     {{- if .Values.global -}}
       {{- if .Values.global.deployDescriptor -}}
-        {{- printf "%s" (index .Values.global.deployDescriptor "cloud-profiler-dumps-collector" "image") -}}
+        {{- if and $useScriptsImage (index .Values.global.deployDescriptor "cloud-profiler-dumps-collector-scripts") -}}
+          {{- printf "%s" (index .Values.global.deployDescriptor "cloud-profiler-dumps-collector-scripts" "image") -}}
+        {{- else -}}
+          {{- printf "%s" (index .Values.global.deployDescriptor "cloud-profiler-dumps-collector" "image") -}}
+        {{- end -}}
       {{- end -}}
     {{- else -}}
       {{- if .Values.deployDescriptor -}}
-        {{- printf "%s" (index .Values.deployDescriptor "cloud-profiler-dumps-collector" "image") -}}
+        {{- if and $useScriptsImage (index .Values.deployDescriptor "cloud-profiler-dumps-collector-scripts") -}}
+          {{- printf "%s" (index .Values.deployDescriptor "cloud-profiler-dumps-collector-scripts" "image") -}}
+        {{- else -}}
+          {{- printf "%s" (index .Values.deployDescriptor "cloud-profiler-dumps-collector" "image") -}}
+        {{- end -}}
       {{- else -}}
         {{- print "product/prod.platform.cloud.infra_profiler_cdt-cloud-profiler-dumps-collector:master_latest" -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
-
 
 {{/*
 Template to insert envs for ENVs for selected storage

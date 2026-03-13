@@ -64,6 +64,10 @@ dumpsCollector:
   install: true
   name: cloud-profiler-dumps-collector
   image: ~
+  # Optional switch for deployDescriptor-based image resolution.
+  # When true, Helm tries key "cloud-profiler-dumps-collector-scripts" first,
+  # then falls back to "cloud-profiler-dumps-collector".
+  useScriptsImage: true
   imagePullPolicy: IfNotPresent
 
   replicas: 1

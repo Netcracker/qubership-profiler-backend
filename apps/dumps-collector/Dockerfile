@@ -71,6 +71,9 @@ COPY apps/dumps-collector/src/nginx/nginx-https.conf /scripts/nginx/
 
 COPY apps/dumps-collector/src/nginx/entrypoint.sh /scripts/
 
+COPY apps/dumps-collector/scripts/cleanup.sh /scripts/
+COPY apps/dumps-collector/scripts/cleanup-namespace.sh /scripts/
+
 RUN chown -R ${USER_UID} /scripts/ \
     && chmod -R a+rx /scripts/ \
     && mkdir -p \

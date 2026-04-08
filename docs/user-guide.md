@@ -36,7 +36,7 @@ CDT UI provides a convenient UI tool  filter runtime calls captured during work 
 
 ## Main page
 
-![main page](../images/user_guide/main_page.png)
+![main page](images/user_guide/main_page.png)
 
 User interfaces contains three main parts:
 
@@ -81,7 +81,7 @@ The system displays Calls table related on selected items from Namespace tree an
 loading the new data into the Calls Overview table until the user clicks `Apply` button.
 While the data is being loaded into the system user interface, the system displays a loading indicator
 
-![Calls list](../images/user_guide/calls-list/calls_list.png)
+![Calls list](images/user_guide/calls-list/calls_list.png)
 
 User can provide the following filter conditions:
 
@@ -108,7 +108,7 @@ The system allows the user to do following action with table columns:
 * Sorting by column (except "Title" and "Pod" columns). By default, the data sorted by Start Timestamp column.
 * Show or hide columns, reorder them. Change column width.
 
-![img.png](../images/user_guide/calls-list/columns.png)
+![img.png](images/user_guide/calls-list/columns.png)
 
 <!-- markdownlint-disable line-length -->
 | Name             | Example                          | Description                                                                                                                                                                                                                                |
@@ -170,7 +170,7 @@ Normal values are `1'000` for the blank page and `1'000'000` for a somehow fille
 Call Tree is a list of call parameters and an underlying hierarchy of java methods invoked successively in the same
 execution thread.
 
-![img.png](../images/user_guide/call-tree/call_tree.png)
+![img.png](images/user_guide/call-tree/call_tree.png)
 
 It shows how the total working time was distributed on the concrete java methods. The call tree
 displays only the methods marked for profiling in the configuration, and it shows a full tree reflecting the time
@@ -178,15 +178,15 @@ distribution. In simple cases, it is enough to understand the reason for the slo
 
 * Explanation of fields:
 
-  ![img_3.png](../images/user_guide/call-tree/tree_items_desc.png)
+  ![img_3.png](images/user_guide/call-tree/tree_items_desc.png)
 
 * Hold `Ctrl` and hover over duration field to get additional statistics about call:
 
-  ![img.png](../images/user_guide/call-tree/hover_duration.png)
+  ![img.png](images/user_guide/call-tree/hover_duration.png)
 
 * Hold `Ctrl` and hover over class name to see full name and start row number:
 
-  ![img_1.png](../images/user_guide/call-tree/hover_classname.png)
+  ![img_1.png](images/user_guide/call-tree/hover_classname.png)
 
 ### Call tree modes
 
@@ -213,55 +213,55 @@ In both modes
 
 * Click on arrow near line to get popup with an operation list:
 
-  ![Call Tree](../images/user_guide/call-tree/operations.png)
+  ![Call Tree](images/user_guide/call-tree/operations.png)
 
 * **Get stacktrace:** \
   This provides a representation of a call stack at a certain point in time, with each element representing a method
   invocation. The stack trace contains all invocations from the start of a thread until the point it is generated.
 
-  ![Get stacktrace](../images/user_guide/call-tree/stack_trace.png)
+  ![Get stacktrace](images/user_guide/call-tree/stack_trace.png)
 
 * **Outgoing calls:** \
   When you click this option, a separate tab opens with the method that is called from the chosen one. It shows the
   number of entries of the selected entity the tree has. The results are similar to the Call Tree results.
 
-  ![Outgoing calls](../images/user_guide/call-tree/outgoing_calls.png)
+  ![Outgoing calls](images/user_guide/call-tree/outgoing_calls.png)
 
 * **Incoming calls:** \
   Allows finding methods, which have called the chosen one. On the Hotspots tab, Incoming calls for all the possible
   methods are displayed.
 
-  ![Incoming calls](../images/user_guide/call-tree/incoming_calls.png)
+  ![Incoming calls](images/user_guide/call-tree/incoming_calls.png)
 
 * **Local hotspots:** \
   It is similar to the Outgoing calls bottom-up view.
 
-  ![Local hotspots](../images/user_guide/call-tree/local_hotspots.png)
+  ![Local hotspots](images/user_guide/call-tree/local_hotspots.png)
 
 * **Adjust Duration:** \
   This enables to artificially adjust the duration of the given method in the profiling results. It enables to predict
   the overall duration for the specific methods. \
   The syntax is a list of strings `<multiplier> <method name>`.
 
-  ![Adjust Duration](../images/user_guide/call-tree/adjust_duration.png)
+  ![Adjust Duration](images/user_guide/call-tree/adjust_duration.png)
 
 * **Add Category:** \
   This configured categories for the "bottom-up" mode view. The syntax
   is `<cagerory>.<subcategory>.<subsubcategory>.... <method name>`.
 
-  ![Add Category](../images/user_guide/call-tree/add_category.png)
+  ![Add Category](images/user_guide/call-tree/add_category.png)
 
 * **Mark red:** \
   Highlight suspicious calls
 
-  ![Mark red](../images/user_guide/call-tree/mark_red.png)
+  ![Mark red](images/user_guide/call-tree/mark_red.png)
 
 * **Find Usages:** \
   Enables finding all the places, where the selected method is used.
   The meanings of the parameters are same as in a call tree, but most of them (all except calls) are relative to the
   method, on which `Find usages` been used.
 
-  ![Find Usages](../images/user_guide/call-tree/find_usage.png)
+  ![Find Usages](images/user_guide/call-tree/find_usage.png)
 
   Description of parameters about the method, on which `Find usages` was opened:
 
@@ -286,14 +286,14 @@ In both modes
 
 The Hotspots tab displays exactly the same tree as on Call Tree, but is turned upside down (**top-down** -> **bottom-up**).
 
-![Hotspots](../images/user_guide/call-tree/hotspots.png)
+![Hotspots](images/user_guide/call-tree/hotspots.png)
 
 ### Parameters
 
 The Parameters tab provides a short summary of a Call Tree page with listing only the key parameters. This is helpful to
 easily identify the call.
 
-![Parameters](../images/user_guide/call-tree/parameters.png)
+![Parameters](images/user_guide/call-tree/parameters.png)
 
 ## Services
 
@@ -302,7 +302,7 @@ easily identify the call.
 `Pods Info` tab allows browsing active pods for selected services.
 It also allows to view and download GC Logs, TOP and thread dumps:
 
-![Services](../images/user_guide/services/services.png)
+![Services](images/user_guide/services/services.png)
 
 * **Thread dumps:** \
   The snapshot of java thread states collected with 1 min interval in the selected time range.
@@ -316,12 +316,12 @@ It also allows to view and download GC Logs, TOP and thread dumps:
 Thread Dumps are the snapshot of java thread states.
 <br> User can download dumps of the pod or service for a selected time range.
 
-![Thread dumps](../images/user_guide/services/thread_dumps.png)
+![Thread dumps](images/user_guide/services/thread_dumps.png)
 
 Downloaded zip file will contain different thread dump files generated with an interval of a minute, and filename is UTC
 timestamp with `YYYY-MM-DD-T-HH-MM-SS-UTC` format.
 
-![TD File Structure](../images/user_guide/services/thread_file.png)
+![TD File Structure](images/user_guide/services/thread_file.png)
 
 Example of contents in the thread dump file
 
@@ -361,12 +361,12 @@ TOP dumps contain information about currently running processes and their parame
 no of threads in different states, process ID, etc.
 <br> User can download dumps of the pod or service for a selected time range.
 
-![TOP dumps](../images/user_guide/services/top_dumps.png)
+![TOP dumps](images/user_guide/services/top_dumps.png)
 
 Downloaded zip file will contain different TOP dumps generated with an interval of a minute, and filename is UTC
 timestamp with `YYYY-MM-DD-T-HH-MM-SS-UTC` format.
 
-![TOP File Structure](../images/user_guide/services/top_file.png)
+![TOP File Structure](images/user_guide/services/top_file.png)
 
 Example of contents in the TOP log file:
 
@@ -408,12 +408,12 @@ Garbage Collection logs contain records for the memory availability and memory d
 It can help find out the possible performance issues due to memory leaks.
 <br> User can download Garbage Collection logs of the pod or service for a selected time range.
 
-![Garbage Collection](../images/user_guide/services/gc_log.png)
+![Garbage Collection](images/user_guide/services/gc_log.png)
 
 Downloaded zip file will contain different garbage collection log files, filename is a UTC timestamp with
 `YYYY-MM-DD-T-HH-MM-SS-UTC` format.
 
-![GC File Structure](../images/user_guide/services/gc_file.png)
+![GC File Structure](images/user_guide/services/gc_file.png)
 
 Example of contents in the garbage collection log file:
 
@@ -453,7 +453,7 @@ when application fails with an `OutOfMemoryError` exception. It would be uploade
 
 Available heap dumps will be listened in a separate column on the `Heap dumps` tab:
 
-![Heap Dumps](../images/user_guide/heap/heap_dumps.png)
+![Heap Dumps](images/user_guide/heap/heap_dumps.png)
 
 Due to big size of heap dump in most cases, it is persisted and downloaded as an archive.
 Downloaded zip file will contain a heap dump itself - a filename with `java_pid<number>.hprof` format.
@@ -475,16 +475,16 @@ There are at least two free open-source tools useful during memory allocation in
 VisualVM displays the Summary view by default, it displays the running environment where the heap dump
 was taken and other system properties:
 
-![VisualVM Summary View](../images/user_guide/heap/heap_vvm_summary.png)
+![VisualVM Summary View](images/user_guide/heap/heap_vvm_summary.png)
 
 You can use `Compute Retained Sizes` button to figure out dominators (instances which have the biggest cumulative size),
 but it takes long time for heavy heap dumps.
 
-![VisualVM Summary Dominators](../images/user_guide/heap/heap_vvm_dominators.png)
+![VisualVM Summary Dominators](images/user_guide/heap/heap_vvm_dominators.png)
 
 By clicking on a row it possible to get info about usage and actual values for selected object:
 
-![VisualVM Summary Details View](../images/user_guide/heap/heap_vvm_details.png)
+![VisualVM Summary Details View](images/user_guide/heap/heap_vvm_details.png)
 
 There also `Classes View` (displays list of classes and the number and percentage of instances referenced by that class)
 and `Instances View` (displays object instances for a selected class) for additional statistics.
@@ -500,11 +500,11 @@ See documentation for more information:
 
 * Eclipse Memory Analyzer (MAT): [eclipse.dev/mat](https://eclipse.dev/mat/)
 
-![MAT Open File](../images/user_guide/heap/heap_mat_open.png)
+![MAT Open File](images/user_guide/heap/heap_mat_open.png)
 
 It contains not only an overview of the heap dump and leak suspect info:
 
-![MAT Open Leak suspects](../images/user_guide/heap/heap_mat_leak.png)
+![MAT Open Leak suspects](images/user_guide/heap/heap_mat_leak.png)
 
 Several things to investigate:
 
@@ -515,17 +515,17 @@ Several things to investigate:
 
 If the leak suspect is a group of objects then the biggest few objects are shown by Biggest Instances:
 
-![MAT Top Consumers](../images/user_guide/heap/heap_mat_top_consumers.png)
+![MAT Top Consumers](images/user_guide/heap/heap_mat_top_consumers.png)
 
 The dominator tree is used to identify the retained heap. It is produced by the complex object graph
 generated at runtime and helps to identify the largest memory graphs, so we can see which objects
 are retained in the memory:
 
-![MAT Big Objects](../images/user_guide/heap/heap_mat_big_objects.png)
+![MAT Big Objects](images/user_guide/heap/heap_mat_big_objects.png)
 
 And also `Histogram view` can be used to get a better insight into which objects exist:
 
-![MAT Histogram](../images/user_guide/heap/heap_mat_histogram.png)
+![MAT Histogram](images/user_guide/heap/heap_mat_histogram.png)
 
 It is also possible to use `OQL` here too.
 

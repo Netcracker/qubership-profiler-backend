@@ -1,3 +1,3 @@
 # cloud-maintenance-job
 
-* [Installation guide](./docs/public/installation.md)
+* [Installation guide](../../docs/installation.md)

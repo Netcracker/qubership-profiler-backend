@@ -5,7 +5,7 @@
 
 #### Conceptual data modeling
 
-![conceptual schema](../../images/diagrams/schema_conceptual.png)
+![conceptual schema](../../../images/diagrams/schema_conceptual.png)
 
 #### Logical data modeling
 
@@ -23,7 +23,7 @@
 - statistics
   - **PodR**  `[1]---[M]` **PodStat** upload dump statistics (by minutes + by types)
 
-![logical schema](../../images/diagrams/schema_logical.png)
+![logical schema](../../../images/diagrams/schema_logical.png)
 
 #### Assumptions
 
@@ -77,24 +77,24 @@ Types of read:
 
 - List of active pods (`R.C`)
 
-![active pods](../../images/diagrams/active_pods.png)
+![active pods](../../../images/diagrams/active_pods.png)
 
 - Statistics for selected services in timerange (`R.B`)
 
-![pod statistics](../../images/diagrams/pod_stats.png)
+![pod statistics](../../../images/diagrams/pod_stats.png)
 
 - Download dumps for selected services (`R.B`)
 
-![pod dumps](../../images/diagrams/pod_dumps.png)
+![pod dumps](../../../images/diagrams/pod_dumps.png)
 
 - Filtered list of calls (for selected services, in timerange) (several `R.B` with a lot of results)
   - with additional **filtering** and **sorting** on backend/UI
 
-![calls list](../../images/diagrams/calls_list.png)
+![calls list](../../../images/diagrams/calls_list.png)
 
 - Expanded tree for selected call  (several `R.A`)
 
-![call tree](../../images/diagrams/call_tree.png)
+![call tree](../../../images/diagrams/call_tree.png)
 
 ### Estimates
 

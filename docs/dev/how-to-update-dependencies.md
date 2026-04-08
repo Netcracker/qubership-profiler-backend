@@ -59,23 +59,3 @@ To update the version of our libraries (profiler-common, profiler-protocol, clou
 you will need to manually change the version in the **go.mod** file.
 
 Finally, run `go mod tidy` to add missing dependencies, remove unused dependencies, and update **go.sum**.
-
-### Resolve "Not promotable" Status
-
-After such updates, it is essential to resolve the “Not promotable” status.
-To do this, please refer to this [page](how-to-work-with-ci.md#resolve-not-promotable-status).
-
-Again, it is best to do this in the correct order:
-starting with profiler-common, profiler-protocol, cloud-storage, and moving on to services.
-
-## Cloud Profiler and UI
-
-After updating **cloud-profiler-ui** and merging it into master,
-the **profiler-ui-version** file with its version should automatically update in **cloud-profiler**.
-
-However, after promoting **cloud-profiler-ui**, this file must be changed manually.
-
-You can read more about this on this [page](how-to-work-with-ci.md#ui-build).
-
-After such updates, it is essential to resolve the “Not promotable” status.
-To do this, please refer to this [page](how-to-work-with-ci.md#resolve-not-promotable-status).

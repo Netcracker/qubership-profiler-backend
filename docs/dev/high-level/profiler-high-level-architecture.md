@@ -131,7 +131,7 @@ To enable this data transfer, the `profiler-agent` must be configured with the f
 * `NC_DIAGNOSTIC_MODE`: Enables diagnostic mode. Supported values are `off`, `dev`, or `prod`.
 * `NC_DIAGNOSTIC_AGENT_SERVICE`: Specifies the destination service for performance data (e.g., `nc-diagnostic-agent`).
 
-For more information on how to configure `profiler-agent`, see this [guide](../../public/add-cdt-agent.md).
+For more information on how to configure `profiler-agent`, see this [guide](../../add-cdt-agent.md).
 
 ---
 

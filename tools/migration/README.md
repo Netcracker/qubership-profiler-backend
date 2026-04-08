@@ -75,7 +75,7 @@ data inconsistency in case, if cloud-profiler deploy fails and rollback is neede
 
 Migration-cleaner should be deployed as part of cloud-profiler, and runs as pre-hook job.
 
-Installation process for migration-cleaner is available [here](documentation/public/installation.md).
+Installation process for migration-cleaner is available [here](../../docs/installation.md).
 
 ### Deploy with restricted access
 

@@ -57,14 +57,14 @@ the following are major data structures:
 
 ### Binary description of Dictionary
 
-![dictionary.png](../../images/entities/dictionary.png)
+![dictionary.png](../../../images/entities/dictionary.png)
 
 `Dictionary` consist of keys and values where the position of the value in binary file is
 considered as key (`id`) and value is a string data.
 
 ### Example of Binary file for Dictionary
 
-![dict_example.png](../../images/entities/dict_example.png)
+![dict_example.png](../../../images/entities/dict_example.png)
 
 ### Extracted Dictionary value
 
@@ -85,7 +85,7 @@ considered as key (`id`) and value is a string data.
 
 ### Binary Representation of Param
 
-![params.png](../../images/entities/params.png)
+![params.png](../../../images/entities/params.png)
 
 Param consist of parameters stored in a following order:
 
@@ -97,7 +97,7 @@ Param consist of parameters stored in a following order:
 
 ### Example of Binary file for Param
 
-![param_example.png](../../images/entities/param_example.png)
+![param_example.png](../../../images/entities/param_example.png)
 
 ### Extracted Param value
 
@@ -118,7 +118,7 @@ Param consist of parameters stored in a following order:
 
 ### Binary Representation of Suspend
 
-![suspend.png](../../images/entities/suspend.png)
+![suspend.png](../../../images/entities/suspend.png)
 
 Suspend consist of captured delays stored in a following order:
 
@@ -129,7 +129,7 @@ For the first record `start_time` is considered as _previous timestamp_.
 
 ### Example of Binary file for Suspend
 
-![suspend_example.png](../../images/entities/suspend_example.png)
+![suspend_example.png](../../../images/entities/suspend_example.png)
 
 ### Extracted Suspend value
 
